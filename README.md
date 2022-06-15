@@ -1,22 +1,22 @@
 <h1 align="center">
   <br>
-  <img src="https://raw.githubusercontent.com/gabrielmaialva33/node-ts-app-template/master/.github/assets/icon.png" alt="TypeScript" width="200">
+  <img src="https://raw.githubusercontent.com/gabrielmaialva33/base-graphql-api/master/.github/assets/icon.png" alt="GraphQL" width="200">
   <br>
-  A template for <a href="https://nodejs.org/en/">Node.js</a>
+  A base project with <a href="https://graphql.org/">GraphQL</a>
   <br>
 </h1>
 
 <p align="center">
-  <strong>A complete Node.js project template using TypeScript </strong>
+  <strong>A GraphQL project using TypeScript </strong>
 </p>
 
 <p align="center">
-  <img src="https://img.shields.io/github/license/gabrielmaialva33/node-ts-app-template?color=00b8d3?style=flat&logo=appveyor" alt="License" />
-  <img src="https://img.shields.io/github/languages/top/gabrielmaialva33/node-ts-app-template?style=flat&logo=appveyor" alt="GitHub top language" >
-  <img src="https://img.shields.io/github/languages/count/gabrielmaialva33/node-ts-app-template?style=flat&logo=appveyor" alt="GitHub language count" >
-  <img src="https://img.shields.io/github/repo-size/gabrielmaialva33/node-ts-app-template?style=flat&logo=appveyor" alt="Repository size" >
-  <a href="https://github.com/gabrielmaialva33/node-ts-app-template/commits/master">
-    <img src="https://img.shields.io/github/last-commit/gabrielmaialva33/node-ts-app-template?style=flat&logo=appveyor" alt="GitHub last commit" >
+  <img src="https://img.shields.io/github/license/gabrielmaialva33/base-graphql-api?color=00b8d3?style=flat&logo=appveyor" alt="License" />
+  <img src="https://img.shields.io/github/languages/top/gabrielmaialva33/base-graphql-api?style=flat&logo=appveyor" alt="GitHub top language" >
+  <img src="https://img.shields.io/github/languages/count/gabrielmaialva33/base-graphql-api?style=flat&logo=appveyor" alt="GitHub language count" >
+  <img src="https://img.shields.io/github/repo-size/gabrielmaialva33/base-graphql-api?style=flat&logo=appveyor" alt="Repository size" >
+  <a href="https://github.com/gabrielmaialva33/base-graphql-api/commits/master">
+    <img src="https://img.shields.io/github/last-commit/gabrielmaialva33/base-graphql-api?style=flat&logo=appveyor" alt="GitHub last commit" >
     <img src="https://img.shields.io/badge/made%20by-Maia-15c3d6?style=flat&logo=appveyor" alt="Maia" >  
   </a>
 </p>
@@ -34,7 +34,6 @@
 <br>
 
 
-
 ## :bookmark: About
 
 **Node Typescript App** A complete Node.js project template using TypeScript and following general best practices.
@@ -49,6 +48,7 @@
 
 - **[Typescript](https://www.typescriptlang.org/)**
 - **[Node.js](https://nodejs.org/)**
+- **[GraphQL](https://graphql.org/)**
 - **[Eslint](https://eslint.org/)**
 - **[Prettier](https://prettier.io/)**
 - **[Japa](https://japa.dev/)**
@@ -77,7 +77,7 @@ The following software must be installed:
 ### :arrow_down: **Cloning the repository**
 
 ```sh
-  $ git clone https://github.com/gabrielmaialva33/node-ts-app-template.git 
+  $ git clone https://github.com/gabrielmaialva33/base-graphql-api.git 
 ```
 
 <br>
@@ -87,7 +87,7 @@ The following software must be installed:
 - :package: API
 
 ```sh
-  $ cd node-ts-app-template
+  $ cd base-graphql-api
   # Dependencies install.
   $ yarn # or npm install
   # start
