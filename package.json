@@ -75,7 +75,9 @@
     "yarn-upgrade-all": "^0.7.1"
   },
   "dependencies": {
-    "apollo-server": "^3.8.2",
+    "apollo-server-core": "^3.8.2",
+    "apollo-server-express": "^3.8.2",
+    "express": "^4.18.1",
     "graphql": "^16.5.0",
     "reflect-metadata": "^0.1.13",
     "source-map-support": "^0.5.21"
