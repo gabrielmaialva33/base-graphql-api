@@ -1,5 +1,5 @@
 const colors = {
-  info: '36',
+  info: '34',
   error: '31;1',
   warn: '33',
   debug: '90',
@@ -8,7 +8,7 @@ const colors = {
 type LogLevel = keyof typeof colors
 
 export const LOG = (level: LogLevel, msg: string) => {
-  msg = color(formatDate(new Date()), '30;1') + ' ' + msg
+  msg = color(formatDate(new Date()), '35') + ' ' + msg
   const c = colors[level.toLowerCase() as LogLevel] || '32'
   console.log('[' + color(level.toUpperCase(), c) + '] ' + msg)
 }

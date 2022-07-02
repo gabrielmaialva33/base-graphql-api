@@ -2,9 +2,9 @@
   "extends": "./tsconfig.paths.json",
   "compilerOptions": {
     "incremental": true,
-
     "lib": [
-      "ESNext"
+      "ESNext",
+      "esnext.asynciterable"
     ],
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
@@ -34,6 +34,8 @@
     "build"
   ],
   "ts-node": {
-    "require": ["tsconfig-paths/register"]
+    "require": [
+      "tsconfig-paths/register"
+    ]
   }
 }

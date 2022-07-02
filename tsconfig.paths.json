@@ -2,17 +2,32 @@
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
-      "@utils/*": [
-        "./src/utils/*"
+      "@config/*": [
+        "./src/config/*"
       ],
-      "@schemas/*": [
-        "./src/schemas/*"
+      "@containers/*": [
+        "./src/containers/*"
+      ],
+      "@db/*": [
+        "./src/db/*"
+      ],
+      "@entities/*": [
+        "./src/entities/*"
+      ],
+      "@interfaces/*": [
+        "./src/interfaces/*"
+      ],
+      "@repositories/*": [
+        "./src/repositories/*"
       ],
       "@resolvers/*": [
         "./src/resolvers/*"
       ],
-      "@config/*": [
-        "./src/config/*"
+      "@schemas/*": [
+        "./src/schemas/*"
+      ],
+      "@utils/*": [
+        "./src/utils/*"
       ]
     }
   }

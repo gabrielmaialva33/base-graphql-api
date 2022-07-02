@@ -1,24 +1,12 @@
-import people from './dataset'
+import { buildSchema } from 'type-graphql'
 
-const Resolvers = {
-  Query: {
-    getAllPeople: () => people,
+import UserResolver from '@resolvers/user.resolver'
 
-    getPerson: (_: any, args: any) => {
-      console.log(args)
-      return people.find((person) => person.id === args.id)
-    },
-  },
-  Mutation: {
-    addPerson: (_: any, args: any) => {
-      const newPerson = {
-        id: people.length + 1,
-        name: args.name,
-      }
-      people.push(newPerson)
-      return newPerson
-    },
-  },
+import serviceContainer from '../container'
+
+export const Schemas = async () => {
+  return await buildSchema({
+    resolvers: [UserResolver],
+    container: serviceContainer,
+  })
 }
-
-export default Resolvers

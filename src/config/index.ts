@@ -8,14 +8,13 @@ export namespace Database {
     process.env.DATABASE_URL || 'postgresql://postgres:postgres@localhost:5432/postgre'
   export const config = parse(url)
   export const { host, port, user, password, database } = config
-  export const min = Number(process.env.PG_POOL_MIN || '0')
+  export const min = Number(process.env.PG_POOL_MIN || '2')
   export const max = Number(process.env.PG_POOL_MAX || '10')
-  export const idle = Number(process.env.PG_POOL_IDLE || '10000')
 }
 
 export namespace Knex {
   export const config = {
-    client: 'postgresql',
+    client: 'pg',
     connection: {
       host: process.env.PG_HOST || Database.host,
       port: process.env.PG_PORT || Database.port,
@@ -29,6 +28,10 @@ export namespace Knex {
     },
     migrations: {
       tableName: 'knex_migrations',
+      directory: './src/db/migrations',
+    },
+    seeds: {
+      directory: './src/db/seeds',
     },
   }
 }

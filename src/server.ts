@@ -1,29 +1,17 @@
-import express, { Express } from 'express'
-import http from 'http'
-import { ApolloServer } from 'apollo-server-express'
-import { IResolvers, TypeSource } from '@graphql-tools/utils'
-import { ApolloServerPluginDrainHttpServer } from 'apollo-server-core'
+import 'reflect-metadata'
+import { ApolloServer } from 'apollo-server'
 
-import Schemas from '@schemas/index'
-import Resolvers from '@resolvers/index'
 import { LOG } from '@utils/log'
+import db from './db/connection'
+import { Schemas } from '@resolvers/index'
 
-async function startApolloServer(schema: TypeSource, resolvers: IResolvers): Promise<void> {
-  const app: Express = express()
-  const httpServer = http.createServer(app)
-
+export const startApolloServer = async () => {
   const server = new ApolloServer({
-    typeDefs: schema,
-    resolvers: resolvers,
-    plugins: [ApolloServerPluginDrainHttpServer({ httpServer })],
+    schema: await Schemas(),
+    context: ({ req, res }) => ({ req, res, db }),
   })
 
-  await server.start()
-  server.applyMiddleware({ app })
-
-  await new Promise<void>((resolve) => httpServer.listen({ port: 4000 }, resolve)).then(() => {
-    LOG('info', `🚀 Server ready at http://localhost:4000${server.graphqlPath}`)
-  })
+  return server.listen().then(({ url }) => LOG('info', `🚀 Server ready at ${url}`))
 }
 
-startApolloServer(Schemas, Resolvers)
+startApolloServer()
