@@ -35,7 +35,7 @@
 
 ## :bookmark: About
 
-**Base GraphQL App** A Node.js base project using GraphQL and following general best practices.
+**Base GraphQL** A Node.js base project using GraphQL and following general best practices.
 
 <kbd>
   <img src=".github/assets/images/schema.png" alt="schema">
