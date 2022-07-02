@@ -35,7 +35,7 @@
 
 ## :bookmark: About
 
-**Node Typescript App** A complete Node.js project template using TypeScript and following general best practices.
+**Base GraphQL App** A Node.js base project using GraphQL and following general best practices.
 
 <kbd>
   <img src=".github/assets/images/schema.png" alt="schema">
@@ -89,7 +89,7 @@ The following software must be installed:
   # Dependencies install.
   $ yarn # or npm install
   # start
-  $ yarn watch:dev # or yarn watch:server
+  $ yarn watch:server # or yarn watch:build
 ```
 
 <br>
