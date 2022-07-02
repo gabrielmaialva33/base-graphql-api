@@ -1,9 +1,10 @@
 import { Query, Resolver } from 'type-graphql'
-import UserEntity from '@entities/user.entity'
+import { inject, injectable } from 'inversify'
 
 import { IUser } from '@interfaces/user.interface'
-import { inject, injectable } from 'inversify'
-import TYPES from '../container/types'
+import UserEntity from '@entities/user.entity'
+
+import TYPES from '@container/types'
 
 @injectable()
 @Resolver((_of) => UserEntity)
