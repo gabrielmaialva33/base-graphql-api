@@ -1,20 +1,16 @@
 import { Container } from 'inversify'
 
-import TYPES from './types'
-
 import { IUser } from '@interfaces/user.interface'
 import UsersRepository from '@repositories/users.repository'
 import UsersService from 'src/services/users.service'
 import UserResolver from '@resolvers/user.resolver'
 
-const serviceContainer = new Container({ skipBaseClassChecks: true })
+import TYPES from '@container/types'
 
-serviceContainer
-  .bind<IUser.Repository>(TYPES.UsersRepository)
-  .to(UsersRepository)
-  .inSingletonScope()
+const container = new Container({ skipBaseClassChecks: true })
 
-serviceContainer.bind<IUser.Service>(TYPES.UsersService).to(UsersService).inSingletonScope()
-serviceContainer.bind<UserResolver>(UserResolver).to(UserResolver).inSingletonScope()
+container.bind<IUser.Repository>(TYPES.UsersRepository).to(UsersRepository).inSingletonScope()
+container.bind<IUser.Service>(TYPES.UsersService).to(UsersService).inSingletonScope()
+container.bind<UserResolver>(UserResolver).to(UserResolver).inSingletonScope()
 
-export default serviceContainer
+export default container

@@ -2,11 +2,11 @@ import { buildSchema } from 'type-graphql'
 
 import UserResolver from '@resolvers/user.resolver'
 
-import serviceContainer from '../container'
+import container from '@container/index'
 
 export const Schemas = async () => {
   return await buildSchema({
     resolvers: [UserResolver],
-    container: serviceContainer,
+    container,
   })
 }

@@ -5,8 +5,8 @@
       "@config/*": [
         "./src/config/*"
       ],
-      "@containers/*": [
-        "./src/containers/*"
+      "@container/*": [
+        "./src/container/*"
       ],
       "@db/*": [
         "./src/db/*"
@@ -23,8 +23,8 @@
       "@resolvers/*": [
         "./src/resolvers/*"
       ],
-      "@schemas/*": [
-        "./src/schemas/*"
+      "@services/*": [
+        "./src/services/*"
       ],
       "@utils/*": [
         "./src/utils/*"
