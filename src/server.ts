@@ -22,7 +22,9 @@ export const startApolloServer = async () => {
     context: ({ req, res }) => ({ req, res, db }),
   })
 
-  return server.listen().then(({ url }) => LOG('info', `🚀 Server ready at ${url}`))
+  return server
+    .listen()
+    .then(({ url }) => LOG('info', `🚀 Server is running, GraphQL Playground available at ${url}`))
 }
 
 startApolloServer()

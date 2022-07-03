@@ -18,7 +18,7 @@ export default class UserEntity {
   public username!: string
 
   @Field()
-  public password_hash!: string
+  public password!: string
 
   @Field()
   public created_at!: Date

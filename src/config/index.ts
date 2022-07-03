@@ -5,9 +5,13 @@ dotenv.config()
 
 export namespace Database {
   export const url =
-    process.env.DATABASE_URL || 'postgresql://postgres:postgres@localhost:5432/postgre'
-  export const config = parse(url)
-  export const { host, port, user, password, database } = config
+    process.env.DATABASE_URL || 'postgresql://postgres:postgres@localhost:5432/postgres'
+  export const urlParsed = parse(url)
+  export const host = urlParsed.host || process.env.PG_HOST || 'localhost'
+  export const port = urlParsed.port || process.env.PG_PORT || 5432
+  export const user = urlParsed.user || process.env.PG_USER || 'postgres'
+  export const password = urlParsed.password || process.env.PG_PASSWORD || 'postgres'
+  export const database = urlParsed.database || process.env.PG_DATABASE || 'postgres'
   export const min = Number(process.env.PG_POOL_MIN || '2')
   export const max = Number(process.env.PG_POOL_MAX || '10')
 }
@@ -16,15 +20,15 @@ export namespace Knex {
   export const config = {
     client: 'pg',
     connection: {
-      host: process.env.PG_HOST || Database.host,
-      port: process.env.PG_PORT || Database.port,
-      user: process.env.PG_USER || Database.user,
-      password: process.env.PG_PASSWORD || Database.password,
-      database: process.env.PG_DB_NAME || Database.database,
+      host: Database.host,
+      port: Database.port,
+      user: Database.user,
+      password: Database.password,
+      database: Database.database,
     },
     pool: {
-      min: Number(process.env.PG_POOL_MIN) || Database.min,
-      max: Number(process.env.PG_POOL_MAX) || Database.max,
+      min: Database.min,
+      max: Database.max,
     },
     migrations: {
       tableName: 'knex_migrations',

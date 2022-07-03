@@ -14,4 +14,11 @@ export default class UsersRepository extends BaseRepository implements IUser.Rep
   public async list(): Promise<UserEntity[]> {
     return this.db.select('*').from('users')
   }
+
+  public async store(data: Partial<UserEntity>): Promise<UserEntity> {
+    return this.db.transaction(async (trx) => {
+      const [{ id }] = await trx<UserEntity>('users').insert(data).returning('id')
+      return (await this.db.select('*').from<UserEntity>('users').where('id', String(id)).first())!
+    })
+  }
 }

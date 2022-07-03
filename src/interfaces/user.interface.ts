@@ -1,15 +1,11 @@
 import UserEntity from '@entities/user.entity'
 
-declare module UserInterface {
+namespace UserInterface {
   export interface Repository {
     list(): Promise<UserEntity[]>
-  }
 
-  export interface Service {
-    list(): Promise<UserEntity[]>
+    store(data: Partial<UserEntity>): Promise<UserEntity>
   }
-
-  export interface DTO {}
 }
 
 export { UserInterface as IUser }
