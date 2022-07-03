@@ -2,36 +2,16 @@
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
-      "@config/*": [
-        "./src/config/*"
-      ],
-      "@container/*": [
-        "./src/container/*"
-      ],
-      "@db/*": [
-        "./src/db/*"
-      ],
-      "@entities/*": [
-        "./src/entities/*"
-      ],
-      "@interfaces/*": [
-        "./src/interfaces/*"
-      ],
-      "@repositories/*": [
-        "./src/repositories/*"
-      ],
-      "@resolvers/*": [
-        "./src/resolvers/*"
-      ],
-      "@services/*": [
-        "./src/services/*"
-      ],
-      "@utils/*": [
-        "./src/utils/*"
-      ],
-      "@validators/*": [
-        "./src/validators/*"
-      ]
+      "@config/*": ["./src/config/*"],
+      "@container/*": ["./src/container/*"],
+      "@db/*": ["./src/db/*"],
+      "@entities/*": ["./src/entities/*"],
+      "@interfaces/*": ["./src/interfaces/*"],
+      "@repositories/*": ["./src/repositories/*"],
+      "@resolvers/*": ["./src/resolvers/*"],
+      "@services/*": ["./src/services/*"],
+      "@utils/*": ["./src/utils/*"],
+      "@validators/*": ["./src/validators/*"]
     }
   }
 }
