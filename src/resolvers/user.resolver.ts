@@ -22,7 +22,6 @@ export default class UserResolver {
 
   @Mutation(() => UserEntity)
   public async store(@Arg('data', { validate: true }) data: UserDTO.Store) {
-    console.log({ ...data })
     return this.usersRepository.store({ ...data })
   }
 }
