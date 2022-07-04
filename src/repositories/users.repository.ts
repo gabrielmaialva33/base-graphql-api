@@ -1,6 +1,6 @@
 import { injectable } from 'inversify'
 
-import db from '@db/connection'
+import db from '@database/connection'
 import BaseRepository from '@repositories/base.repository'
 import { IUser } from '@interfaces/user.interface'
 import UserEntity from '@entities/user.entity'
@@ -16,7 +16,7 @@ export default class UsersRepository extends BaseRepository implements IUser.Rep
   }
 
   public async store(data: Partial<UserEntity>): Promise<UserEntity> {
-    const [{ id }] = await db<UserEntity>('users').insert(data).returning('id')
+    const [{ id }] = await this.db<UserEntity>('users').insert(data).returning('id')
     return this.db.select('*').from('users').where('id', id).first<UserEntity>()
   }
 }

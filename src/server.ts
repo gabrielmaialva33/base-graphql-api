@@ -3,7 +3,6 @@ import { ApolloServer } from 'apollo-server'
 import { buildSchema } from 'type-graphql'
 
 import container from '@container/inversify'
-import db from '@db/connection'
 
 import UserResolver from '@resolvers/user.resolver'
 import AuthResolver from '@resolvers/auth.resolver'
@@ -20,7 +19,7 @@ export const Schemas = async () => {
 export const startApolloServer = async () => {
   const server = new ApolloServer({
     schema: await Schemas(),
-    context: ({ req, res }) => ({ req, res, db }),
+    context: ({ req, res }) => ({ req, res }),
   })
 
   return server

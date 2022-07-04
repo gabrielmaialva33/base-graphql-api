@@ -5,7 +5,8 @@ import {
   ValidatorConstraintInterface,
   ValidationArguments,
 } from 'class-validator'
-import db from '@db/connection'
+
+import db from '@database/connection'
 
 @ValidatorConstraint({ async: true })
 export class UniqueConstraint implements ValidatorConstraintInterface {
