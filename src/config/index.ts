@@ -40,4 +40,8 @@ export namespace Knex {
   }
 }
 
-export default { Database, Knex }
+export const AppKey = {
+  APP_KEY: process.env.APP_KEY || 'secret',
+}
+
+export default { Database, Knex, AppKey }

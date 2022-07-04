@@ -6,12 +6,13 @@ import container from '@container/inversify'
 import db from '@db/connection'
 
 import UserResolver from '@resolvers/user.resolver'
+import AuthResolver from '@resolvers/auth.resolver'
 
 import { LOG } from '@utils/log'
 
 export const Schemas = async () => {
   return await buildSchema({
-    resolvers: [UserResolver],
+    resolvers: [UserResolver, AuthResolver],
     container,
   })
 }

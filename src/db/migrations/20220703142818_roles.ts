@@ -1,18 +1,14 @@
 import { Knex } from 'knex'
 
-const tableName = 'users'
+const tableName = 'roles'
 
 export async function up(knex: Knex): Promise<void> {
   await knex.schema.createTable(tableName, (table) => {
     table.uuid('id').primary().defaultTo(knex.raw('uuid_generate_v4()'))
 
-    table.string('first_name', 80).notNullable()
-    table.string('last_name', 80).notNullable()
-    table.string('email').notNullable().unique()
-    table.string('username', 30).notNullable()
-    table.string('password_hash', 96).notNullable()
-
-    table.boolean('is_deleted').notNullable().defaultTo(false)
+    table.string('slug', 30).notNullable()
+    table.string('name', 30).notNullable()
+    table.text('description').notNullable()
 
     table.timestamps(true, true)
   })

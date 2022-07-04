@@ -1,9 +1,9 @@
 import { injectable } from 'inversify'
 
+import db from '@db/connection'
 import BaseRepository from '@repositories/base.repository'
 import { IUser } from '@interfaces/user.interface'
 import UserEntity from '@entities/user.entity'
-import db from '@db/connection'
 
 @injectable()
 export default class UsersRepository extends BaseRepository implements IUser.Repository {

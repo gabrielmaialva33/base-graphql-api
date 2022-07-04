@@ -17,8 +17,8 @@ export default class UserEntity {
   @Field()
   public username!: string
 
-  @Field()
-  public password!: string
+  // - hidden
+  public password_hash!: string
 
   @Field()
   public created_at!: Date

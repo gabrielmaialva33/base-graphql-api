@@ -1,8 +1,7 @@
-import { Arg, Mutation, Query, Resolver } from 'type-graphql'
+import { Query, Resolver } from 'type-graphql'
 import { inject, injectable } from 'inversify'
 
 import { IUser } from '@interfaces/user.interface'
-import { UserDTO } from '@entities/./dto/user.dto'
 import UserEntity from '@entities/user.entity'
 
 import TYPES from '@container/types'
@@ -18,10 +17,5 @@ export default class UserResolver {
   @Query(() => [UserEntity])
   public async list() {
     return this.usersRepository.list()
-  }
-
-  @Mutation(() => UserEntity)
-  public async store(@Arg('data', { validate: true }) data: UserDTO.Store) {
-    return this.usersRepository.store({ ...data })
   }
 }
