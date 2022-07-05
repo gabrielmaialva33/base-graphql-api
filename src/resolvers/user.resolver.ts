@@ -16,6 +16,8 @@ export default class UserResolver {
 
   @Query(() => [UserEntity])
   public async list() {
-    return this.usersRepository.list()
+    const users = await this.usersRepository.list(1, 10)
+    console.log(users)
+    return users
   }
 }
