@@ -7,6 +7,7 @@
       "@database/*": ["./src/database/*"],
       "@entities/*": ["./src/entities/*"],
       "@interfaces/*": ["./src/interfaces/*"],
+      "@libs/*": ["./src/libs/*"],
       "@repositories/*": ["./src/repositories/*"],
       "@resolvers/*": ["./src/resolvers/*"],
       "@services/*": ["./src/services/*"],

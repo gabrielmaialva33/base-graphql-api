@@ -1,10 +1,10 @@
 import { injectable } from 'inversify'
 
-import db from '@database/connection'
-import BaseRepository from '@repositories/base.repository'
 import { IUser } from '@interfaces/user.interface'
 import UserEntity from '@entities/user.entity'
-import { IWithPagination } from 'knex-paginate'
+import BaseRepository from '@repositories/base.repository'
+
+import db from '@database/connection'
 
 @injectable()
 export default class UsersRepository extends BaseRepository implements IUser.Repository {
@@ -12,11 +12,8 @@ export default class UsersRepository extends BaseRepository implements IUser.Rep
     super(db)
   }
 
-  public async list(
-    page: number,
-    perPage: number
-  ): Promise<IWithPagination<UserEntity, { perPage: number; currentPage: number }>> {
-    return this.orm<UserEntity>('users').paginate({ perPage: perPage, currentPage: page })
+  public async list(page: number, perPage: number) {
+    return this.orm<UserEntity>('users').paginate({ current_page: page, per_page: perPage })
   }
 
   public async store(data: Partial<UserEntity>): Promise<UserEntity> {

@@ -1,12 +1,8 @@
 import UserEntity from '@entities/user.entity'
-import { IWithPagination } from 'knex-paginate'
 
 namespace UserInterface {
   export interface Repository {
-    list(
-      page: number,
-      perPage: number
-    ): Promise<IWithPagination<UserEntity, { perPage: number; currentPage: number }>>
+    list(page: number, perPage: number): Promise<any>
 
     store(data: Partial<UserEntity>): Promise<UserEntity>
   }
