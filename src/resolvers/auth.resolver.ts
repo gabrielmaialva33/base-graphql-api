@@ -3,8 +3,7 @@ import { Resolver, Mutation, Arg } from 'type-graphql'
 import argon2 from 'argon2'
 
 import { IUser } from '@interfaces/user.interface'
-import UserEntity from '@entities/user.entity'
-import AuthEntity from '@entities/auth.entity'
+import UserEntity, { AuthEntity } from '@entities/user.entity'
 import { RegisterPayload } from '@entities/dto/user.dto'
 
 import TYPES from '@container/types'

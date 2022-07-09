@@ -1,7 +1,7 @@
-import { ObjectType, Field } from 'type-graphql'
+import { ObjectType, Field, ClassType } from 'type-graphql'
 
 @ObjectType()
-export class MetaEntity {
+export default class MetaEntity {
   @Field((_type) => Number)
   public total!: number
 
@@ -19,4 +19,16 @@ export class MetaEntity {
 
   @Field((_type) => Number)
   public to!: number
+}
+
+export function Paginated<TEntity>(entity: ClassType<TEntity>) {
+  @ObjectType({ isAbstract: true })
+  abstract class PaginatedClass {
+    @Field()
+    public meta!: MetaEntity
+
+    @Field((_type) => [entity])
+    public data!: Array<TEntity>
+  }
+  return PaginatedClass
 }

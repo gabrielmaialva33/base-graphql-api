@@ -1,4 +1,5 @@
 import { ObjectType, Field, ID } from 'type-graphql'
+import { Paginated } from '@libs/pagination.entities'
 
 @ObjectType()
 export default class UserEntity {
@@ -27,4 +28,16 @@ export default class UserEntity {
 
   @Field()
   public updated_at!: Date
+}
+
+@ObjectType()
+export class UserPaginated extends Paginated<UserEntity>(UserEntity) {}
+
+@ObjectType()
+export class AuthEntity {
+  @Field()
+  public token!: string
+
+  @Field(() => UserEntity)
+  public user!: UserEntity
 }

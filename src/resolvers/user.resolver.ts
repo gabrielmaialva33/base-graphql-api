@@ -2,8 +2,8 @@ import { inject, injectable } from 'inversify'
 import { Arg, Query, Resolver } from 'type-graphql'
 
 import { IUser } from '@interfaces/user.interface'
-import UserEntity from '@entities/user.entity'
-import { GetUserPayload, UserPagination } from '@entities/dto/user.dto'
+import UserEntity, { UserPaginated } from '@entities/user.entity'
+import { GetUserPayload } from '@entities/dto/user.dto'
 import { PaginationParams } from '@libs/pagination.dto'
 
 import TYPES from '@container/types'
@@ -16,12 +16,12 @@ export default class UserResolver {
     private readonly usersRepository: IUser.Repository
   ) {}
 
-  @Query(() => UserPagination)
+  @Query((_type) => UserPaginated)
   public async list(@Arg('params') { page, per_page: perPage }: PaginationParams) {
     return this.usersRepository.list({ page, perPage })
   }
 
-  @Query(() => UserEntity)
+  @Query((_type) => UserEntity)
   public async get(@Arg('payload', { validate: true }) { id: userId }: GetUserPayload) {
     return this.usersRepository.findBy('id', userId)
   }
