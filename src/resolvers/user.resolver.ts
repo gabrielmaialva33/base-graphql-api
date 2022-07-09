@@ -4,9 +4,9 @@ import { Arg, Query, Resolver } from 'type-graphql'
 import { IUser } from '@interfaces/user.interface'
 import UserEntity from '@entities/user.entity'
 import { GetUserPayload, UserPagination } from '@entities/dto/user.dto'
+import { PaginationParams } from '@libs/pagination.dto'
 
 import TYPES from '@container/types'
-import { PaginationParams } from '@libs/pagination.dto'
 
 @injectable()
 @Resolver((_of) => UserEntity)
@@ -22,7 +22,7 @@ export default class UserResolver {
   }
 
   @Query(() => UserEntity)
-  public async get(@Arg('payload', { validate: true }) { id }: GetUserPayload) {
-    return this.usersRepository.findBy('id', id)
+  public async get(@Arg('payload', { validate: true }) { id: userId }: GetUserPayload) {
+    return this.usersRepository.findBy('id', userId)
   }
 }
