@@ -5,7 +5,7 @@ export namespace IBase {
     /**
      * List all entities
      */
-    list(params?: Params.List): Promise<IWithPagination<Entity>>
+    list({ page, perPage }?: DTO.List): Promise<IWithPagination<Entity>>
 
     /**
      * Store a new entity
@@ -13,15 +13,30 @@ export namespace IBase {
     store(data: Partial<Entity>): Promise<Entity>
 
     /**
+     * Save an existing entity
+     */
+    save({ id, data }: DTO.Save<Entity>): Promise<Entity>
+
+    /**
      * Find an entity by column value
      */
-    findBy(column: string, value: any): Promise<Entity | null>
+    findBy({ column, value }: DTO.Get<Entity>): Promise<Entity | null>
   }
 
-  export namespace Params {
+  export namespace DTO {
     export interface List {
       page?: number
       perPage?: number
+    }
+
+    export interface Get<Entity> {
+      column: Partial<Entity> | string
+      value: any
+    }
+
+    export interface Save<Entity> {
+      id: String
+      data: Partial<Entity>
     }
   }
 }

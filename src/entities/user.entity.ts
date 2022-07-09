@@ -1,4 +1,5 @@
 import { ObjectType, Field, ID } from 'type-graphql'
+
 import { Paginated } from '@libs/pagination.entities'
 
 @ObjectType()

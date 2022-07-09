@@ -3,7 +3,7 @@ import { Knex as KnexOriginal } from 'knex'
 import { IPaginateParams, IWithPagination } from '@libs/pagination.interfaces'
 import { IBase } from '@interfaces/base.interface'
 
-import Params = IBase.Params
+import DTO = IBase.DTO
 
 export default abstract class BaseRepository<Entity> implements IBase.Repository<Entity> {
   protected constructor(protected orm: KnexOriginal, protected tableName: string) {}
@@ -11,7 +11,7 @@ export default abstract class BaseRepository<Entity> implements IBase.Repository
   /**
    * List all entities implementation
    */
-  public async list({ page, perPage }: Params.List): Promise<IWithPagination<Entity>> {
+  public async list({ page, perPage }: DTO.List): Promise<IWithPagination<Entity>> {
     return this.orm<Entity>(this.tableName)
       .where('is_deleted', false)
       .orderBy('created_at')
@@ -26,11 +26,28 @@ export default abstract class BaseRepository<Entity> implements IBase.Repository
     return this.orm(this.tableName).select('*').where('id', id).first()
   }
 
-  public async findBy(column: string, value: any): Promise<Entity | null> {
-    return this.orm(this.tableName).where(column, value).first()
+  /**
+   * Save an existing entity implementation
+   */
+  public async save({ id: entityId, data }: DTO.Save<Entity>): Promise<Entity> {
+    const [{ id }] = await this.orm(this.tableName)
+      .where({ id: entityId })
+      .update(data)
+      .returning('id')
+    return this.orm(this.tableName).select('*').where('id', id).first()
+  }
+
+  /**
+   * Find an entity by column value implementation
+   */
+  public async findBy({ column, value }: DTO.Get<Entity>): Promise<Entity | null> {
+    return this.orm(this.tableName).where(String(column), value).first()
   }
 }
 
+/**
+ * Pagination extension for Knex
+ */
 declare module 'knex' {
   namespace Knex {
     interface QueryBuilder<TRecord extends {} = any, TResult = any> {

@@ -1,9 +1,10 @@
 import { inject, injectable } from 'inversify'
-import { Arg, Query, Resolver } from 'type-graphql'
+import { Arg, Mutation, Query, Resolver } from 'type-graphql'
+import argon2 from 'argon2'
 
 import { IUser } from '@interfaces/user.interface'
 import UserEntity, { UserPaginated } from '@entities/user.entity'
-import { GetUserPayload } from '@entities/dto/user.dto'
+import { EditUserPayload, GetUserPayload } from '@entities/dto/user.dto'
 import { PaginationParams } from '@libs/pagination.dto'
 
 import TYPES from '@container/types'
@@ -16,13 +17,34 @@ export default class UserResolver {
     private readonly usersRepository: IUser.Repository
   ) {}
 
-  @Query((_type) => UserPaginated)
+  @Query((_type) => UserPaginated, {
+    name: 'listUsers',
+    description: 'List of users with pagination',
+  })
   public async list(@Arg('params') { page, per_page: perPage }: PaginationParams) {
     return this.usersRepository.list({ page, perPage })
   }
 
-  @Query((_type) => UserEntity)
+  @Query((_type) => UserEntity, { name: 'getUser', description: 'Get user by id' })
   public async get(@Arg('payload', { validate: true }) { id: userId }: GetUserPayload) {
-    return this.usersRepository.findBy('id', userId)
+    return this.usersRepository.findBy({ column: 'id', value: userId })
+  }
+
+  @Mutation((_type) => UserEntity, { name: 'editUser', description: 'Edit a existing user' })
+  public async edit(
+    @Arg('id', { validate: true }) { id: userId }: GetUserPayload,
+    @Arg('data', { validate: true }) data: EditUserPayload
+  ) {
+    const { first_name, last_name, email, username, password } = data
+    return this.usersRepository.save({
+      id: userId,
+      data: {
+        first_name,
+        last_name,
+        email,
+        username,
+        password_hash: password ? await argon2.hash(password) : undefined,
+      },
+    })
   }
 }

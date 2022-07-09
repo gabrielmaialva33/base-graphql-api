@@ -17,17 +17,16 @@ export default class AuthResolver {
     private readonly usersRepository: IUser.Repository
   ) {}
 
-  @Mutation(() => AuthEntity)
-  public async register(@Arg('payload', { validate: true }) payload: RegisterPayload) {
-    const { first_name, last_name, email, username, password } = payload
+  @Mutation(() => AuthEntity, { name: 'registerUser', description: 'Register a new user' })
+  public async register(@Arg('data', { validate: true }) data: RegisterPayload) {
+    const { first_name, last_name, email, username, password } = data
 
-    const hash = await argon2.hash(password)
     const user = await this.usersRepository.store({
       first_name,
       last_name,
       email,
       username,
-      password_hash: hash,
+      password_hash: await argon2.hash(password),
     })
 
     return { token: generateToken(user), user }
