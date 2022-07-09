@@ -2,12 +2,12 @@
   <br>
   <img src="https://raw.githubusercontent.com/gabrielmaialva33/base-graphql-api/master/.github/assets/icon.png" alt="GraphQL" width="200">
   <br>
-  A base project with <a href="https://graphql.org/">GraphQL</a>
+  A base acl project with <a href="https://graphql.org/">GraphQL</a>
   <br>
 </h1>
 
 <p align="center">
-  <strong>A GraphQL project using TypeScript </strong>
+  <strong>A GraphQL access control list using TypeScript </strong>
 </p>
 
 <p align="center">
@@ -15,6 +15,7 @@
   <img src="https://img.shields.io/github/languages/top/gabrielmaialva33/base-graphql-api?style=flat&logo=appveyor" alt="GitHub top language" >
   <img src="https://img.shields.io/github/languages/count/gabrielmaialva33/base-graphql-api?style=flat&logo=appveyor" alt="GitHub language count" >
   <img src="https://img.shields.io/github/repo-size/gabrielmaialva33/base-graphql-api?style=flat&logo=appveyor" alt="Repository size" >
+  <a href="https://wakatime.com/badge/user/e61842d0-c588-4586-96a3-f0448a434be4/project/04af1ce3-b3b1-4130-b156-685fc3d1a341"><img src="https://wakatime.com/badge/user/e61842d0-c588-4586-96a3-f0448a434be4/project/04af1ce3-b3b1-4130-b156-685fc3d1a341.svg" alt="wakatime"></a>
   <a href="https://github.com/gabrielmaialva33/base-graphql-api/commits/master">
     <img src="https://img.shields.io/github/last-commit/gabrielmaialva33/base-graphql-api?style=flat&logo=appveyor" alt="GitHub last commit" >
     <img src="https://img.shields.io/badge/made%20by-Maia-15c3d6?style=flat&logo=appveyor" alt="Maia" >  
