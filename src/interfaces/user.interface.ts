@@ -1,19 +1,12 @@
 import UserEntity from '@entities/user.entity'
-import { IWithPagination } from '@libs/pagination.interfaces'
+import { IBase } from '@interfaces/base.interface'
 
 namespace UserInterface {
-  export interface Repository {
-    list(params?: Params.List): Promise<IWithPagination<UserEntity>>
-
+  export interface Repository extends IBase.Repository<UserEntity> {
     store(data: Partial<UserEntity>): Promise<UserEntity>
   }
 
-  export namespace Params {
-    export interface List {
-      page?: number
-      perPage?: number
-    }
-  }
+  export namespace Params {}
 }
 
 export { UserInterface as IUser }

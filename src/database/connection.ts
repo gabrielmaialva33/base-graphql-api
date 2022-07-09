@@ -27,6 +27,7 @@ const db = KnexTinyLogger(createKnex(require('../config').Knex.config), {
   logger,
 })
 
+/** attach libs  */
 pagination()
 
 export default db
