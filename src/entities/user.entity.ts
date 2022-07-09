@@ -2,6 +2,8 @@ import { ObjectType, Field, ID } from 'type-graphql'
 
 @ObjectType()
 export default class UserEntity {
+  public static tableName: string = 'users'
+
   @Field((_type) => ID)
   public id!: string
 
