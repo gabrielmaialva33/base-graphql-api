@@ -9,9 +9,15 @@ export default abstract class BaseRepository<Entity> implements IBase.Repository
   protected constructor(protected orm: KnexOriginal, protected tableName: string) {}
 
   public async list({ page, perPage }: Params.List): Promise<IWithPagination<Entity>> {
-    return this.orm(this.tableName)
+    return this.orm<Entity>(this.tableName)
+      .where('is_deleted', false)
       .orderBy('created_at')
       .paginate({ current_page: page, per_page: perPage })
+  }
+
+  public async store(data: Partial<Entity>): Promise<Entity> {
+    const [{ id }] = await this.orm(this.tableName).insert(data).returning('id')
+    return this.orm(this.tableName).select('*').where('id', id).first()
   }
 }
 

@@ -22,8 +22,7 @@ export default class UsersRepository
     return super.list({ page, perPage })
   }
 
-  public async store(data: Partial<UserEntity>): Promise<UserEntity> {
-    const [{ id }] = await this.orm<UserEntity>('users').insert(data).returning('id')
-    return this.orm.select('*').from('users').where('id', id).first<UserEntity>()
+  public store(data: Partial<UserEntity>) {
+    return super.store(data)
   }
 }
