@@ -2,6 +2,7 @@ import { InputType, Field, ObjectType } from 'type-graphql'
 import { IsEmail, Matches, MaxLength, MinLength } from 'class-validator'
 
 import { Unique } from '@validators/unique'
+import { Exists } from '@validators/exists'
 import UserEntity from '@entities/user.entity'
 import { MetaEntity } from '@libs/pagination.entities'
 
@@ -28,7 +29,7 @@ export class RegisterPayload implements Partial<UserEntity> {
     message:
       'The username should only contains alphanumeric characters, underscores and should have a length between 2 to 30',
   })
-  @Unique('users', { message: 'This users is already taken' })
+  @Unique(UserEntity.tableName, { message: 'This users is already taken' })
   public username!: string
 
   @Field()
@@ -43,4 +44,11 @@ export class UserPagination {
 
   @Field((_type) => [UserEntity])
   public data!: UserEntity[]
+}
+
+@InputType()
+export class GetUserPayload {
+  @Field((_type) => String)
+  @Exists(UserEntity.tableName, { message: 'This user not exists or not available' })
+  public id!: String
 }

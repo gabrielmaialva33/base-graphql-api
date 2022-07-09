@@ -3,7 +3,7 @@ import { Arg, Query, Resolver } from 'type-graphql'
 
 import { IUser } from '@interfaces/user.interface'
 import UserEntity from '@entities/user.entity'
-import { UserPagination } from '@entities/dto/user.dto'
+import { GetUserPayload, UserPagination } from '@entities/dto/user.dto'
 
 import TYPES from '@container/types'
 import { PaginationParams } from '@libs/pagination.dto'
@@ -19,5 +19,10 @@ export default class UserResolver {
   @Query(() => UserPagination)
   public async list(@Arg('params') { page, per_page: perPage }: PaginationParams) {
     return this.usersRepository.list({ page, perPage })
+  }
+
+  @Query(() => UserEntity)
+  public async get(@Arg('payload', { validate: true }) { id }: GetUserPayload) {
+    return this.usersRepository.findBy('id', id)
   }
 }

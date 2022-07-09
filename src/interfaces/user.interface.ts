@@ -3,8 +3,6 @@ import { IBase } from '@interfaces/base.interface'
 
 namespace UserInterface {
   export interface Repository extends IBase.Repository<UserEntity> {}
-
-  export namespace Params {}
 }
 
 export { UserInterface as IUser }
