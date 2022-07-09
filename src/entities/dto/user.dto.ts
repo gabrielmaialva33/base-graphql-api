@@ -1,8 +1,9 @@
-import { InputType, Field } from 'type-graphql'
+import { InputType, Field, ObjectType } from 'type-graphql'
 import { IsEmail, Matches, MaxLength, MinLength } from 'class-validator'
 
 import { Unique } from '@validators/unique'
 import UserEntity from '@entities/user.entity'
+import { MetaEntity } from '@libs/pagination.entities'
 
 @InputType()
 export class RegisterPayload implements Partial<UserEntity> {
@@ -33,4 +34,13 @@ export class RegisterPayload implements Partial<UserEntity> {
   @Field()
   @MinLength(6)
   public password!: string
+}
+
+@ObjectType()
+export class UserPagination {
+  @Field((_type) => MetaEntity)
+  public meta!: MetaEntity
+
+  @Field((_type) => [UserEntity])
+  public data!: UserEntity[]
 }

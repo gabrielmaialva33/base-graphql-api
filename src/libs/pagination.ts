@@ -1,16 +1,17 @@
 import { knex } from 'knex'
 
 import db from '@database/connection'
-import { IPaginateParams } from '@libs/pagination.interface'
+import { IPaginateParams } from '@libs/pagination.interfaces'
 
 const pagination = () => {
   function paginate(this: typeof db, params: IPaginateParams) {
-    let { current_page, per_page, is_from_start, is_length_aware } = params
+    let { current_page = 1, per_page = 10, is_from_start, is_length_aware } = params
+
+    if (current_page < 1 || !current_page) current_page = 1
+    if (per_page < 1 || !per_page) per_page = 1
 
     const shouldFetchTotals = is_length_aware || current_page === 1 || is_from_start
     let countQuery: { transacting: (arg0: any) => any }
-
-    if (current_page < 1) current_page = 1
 
     const offset = is_from_start ? 0 : (current_page - 1) * per_page
     const limit = is_from_start ? per_page * current_page : per_page

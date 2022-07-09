@@ -1,6 +1,6 @@
 export interface IPaginateParams {
-  per_page: number
-  current_page: number
+  per_page?: number
+  current_page?: number
   is_from_start?: boolean
   is_length_aware?: boolean
 }
