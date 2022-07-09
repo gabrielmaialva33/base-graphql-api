@@ -1,8 +1,7 @@
 export interface IPaginateParams {
   per_page?: number
   current_page?: number
-  is_from_start?: boolean
-  is_length_aware?: boolean
+  from_start?: boolean
 }
 
 export interface IBasePagination {
@@ -17,10 +16,7 @@ export interface ILengthAwarePagination extends IBasePagination {
   last_page: number
 }
 
-export type IPagination<TParams> = TParams extends
-  | { current_page: 1 }
-  | { is_from_start: true }
-  | { is_length_aware: true }
+export type IPagination<TParams> = TParams extends { current_page: 1 } | { from_start: true }
   ? ILengthAwarePagination
   : IBasePagination
 

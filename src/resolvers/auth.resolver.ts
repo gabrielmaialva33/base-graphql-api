@@ -31,8 +31,6 @@ export default class AuthResolver {
       password_hash: hash,
     })
 
-    const token = generateToken(user)
-
-    return { token, user }
+    return { token: generateToken(user), user }
   }
 }

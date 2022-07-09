@@ -5,28 +5,24 @@ import { IPaginateParams } from '@libs/pagination.interfaces'
 
 const pagination = () => {
   function paginate(this: typeof db, params: IPaginateParams) {
-    let { current_page = 1, per_page = 10, is_from_start, is_length_aware } = params
+    let { current_page = 1, per_page = 10, from_start } = params
 
     if (current_page < 1 || !current_page) current_page = 1
     if (per_page < 1 || !per_page) per_page = 1
 
-    const shouldFetchTotals = is_length_aware || current_page === 1 || is_from_start
-    let countQuery: { transacting: (arg0: any) => any }
-
-    const offset = is_from_start ? 0 : (current_page - 1) * per_page
-    const limit = is_from_start ? per_page * current_page : per_page
+    const offset = from_start ? 0 : (current_page - 1) * per_page
+    const limit = from_start ? per_page * current_page : per_page
 
     const postProcessResponse = this.client.config.postProcessResponse
       ? this.client.config.postProcessResponse
       : (key: any) => key
 
-    if (shouldFetchTotals) {
-      countQuery = new this.constructor(this.client)
-        .count('* as total')
-        .from(this.clone().offset(0).clearOrder().as('count__query__'))
-        .first()
-        .debug(this._debug)
-    }
+    let countQuery: { transacting: (arg0: any) => any }
+    countQuery = new this.constructor(this.client)
+      .count('* as total')
+      .from(this.clone().offset(0).clearOrder().as('count__query__'))
+      .first()
+      .debug(this._debug)
 
     this.offset(offset).limit(limit)
 

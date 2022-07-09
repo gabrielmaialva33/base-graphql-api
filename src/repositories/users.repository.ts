@@ -16,7 +16,11 @@ export default class UsersRepository extends BaseRepository implements IUser.Rep
   }
 
   public async list({ page, perPage }: Params.List): Promise<IWithPagination<UserEntity>> {
-    return this.orm<UserEntity>('users').paginate({ current_page: page, per_page: perPage })
+    return this.orm<UserEntity>('users').paginate({
+      current_page: page,
+      per_page: perPage,
+      is_from_start: false,
+    })
   }
 
   public async store(data: Partial<UserEntity>): Promise<UserEntity> {
