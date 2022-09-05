@@ -5,7 +5,9 @@ import { IBase } from '@interfaces/base.interface'
 
 import DTO = IBase.DTO
 
-export default abstract class BaseRepository<Entity> implements IBase.Repository<Entity> {
+export default abstract class BaseRepository<Entity extends {}>
+  implements IBase.Repository<Entity>
+{
   protected constructor(protected orm: KnexOriginal, protected tableName: string) {}
 
   /**

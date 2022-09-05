@@ -39,6 +39,10 @@ export class RegisterPayload implements Partial<UserEntity> {
 
 @InputType()
 export class EditUserPayload implements Partial<UserEntity> {
+  @Field((_type) => String, { nullable: false, description: 'User id' })
+  @Exists(UserEntity.tableName, { message: 'This user not exists or not available' })
+  public id!: string
+
   @Field({ nullable: true })
   @MaxLength(80)
   @MinLength(2)

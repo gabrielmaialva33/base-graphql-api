@@ -31,13 +31,10 @@ export default class UserResolver {
   }
 
   @Mutation((_type) => UserEntity, { name: 'editUser', description: 'Edit a existing user' })
-  public async edit(
-    @Arg('id', { validate: true }) { id: userId }: GetUserPayload,
-    @Arg('data', { validate: true }) data: EditUserPayload
-  ) {
-    const { first_name, last_name, email, username, password } = data
+  public async edit(@Arg('user', { validate: true }) user: EditUserPayload) {
+    const { id, first_name, last_name, email, username, password } = user
     return this.usersRepository.save({
-      id: userId,
+      id,
       data: {
         first_name,
         last_name,
