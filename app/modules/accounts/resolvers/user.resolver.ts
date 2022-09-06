@@ -21,14 +21,12 @@ export default class UserResolver {
     name: 'listUsers',
     description: 'List of users with pagination',
   })
-  public async list(@Arg('params') params: PaginationDTO.Params) {
-    const { page, per_page: perPage, sort_by: sortBy, direction } = params
-
-    return this.usersRepository.list({ page, perPage, sortBy, direction })
+  public async list(@Arg('params', { nullable: true }) params: PaginationDTO.Params) {
+    return this.usersRepository.list(params || {})
   }
 
   @Query((_type) => UserEntity, { name: 'getUser', description: 'Get user by id' })
-  public async get(@Arg('user', { validate: true }) { id: userId }: UserDTO.Get) {
+  public async get(@Arg('user', { validate: true, nullable: false }) { id: userId }: UserDTO.Get) {
     return this.usersRepository.findBy({ column: 'id', value: userId })
   }
 
