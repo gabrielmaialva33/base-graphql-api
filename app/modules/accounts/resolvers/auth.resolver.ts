@@ -3,8 +3,8 @@ import { Resolver, Mutation, Arg } from 'type-graphql'
 import argon2 from 'argon2'
 
 import { IUser } from 'app/modules/accounts/interfaces/user.interface'
-import UserEntity, { AuthEntity } from 'app/modules/accounts/entities/user.entity'
-import { RegisterPayload } from 'app/modules/accounts/dto/user.dto'
+import UserEntity from 'app/modules/accounts/entities/user.entity'
+import { UserDTO } from 'app/modules/accounts/dto/user.dto'
 
 import TYPES from 'app/shared/container/types'
 import { generateToken } from 'utils/jwt'
@@ -17,8 +17,8 @@ export default class AuthResolver {
     private readonly usersRepository: IUser.Repository
   ) {}
 
-  @Mutation(() => AuthEntity, { name: 'registerUser', description: 'Register a new user' })
-  public async register(@Arg('data', { validate: true }) data: RegisterPayload) {
+  @Mutation(() => UserDTO.Auth, { name: 'registerUser', description: 'Register a new user' })
+  public async register(@Arg('user', { validate: true }) data: UserDTO.Store) {
     const { first_name, last_name, email, username, password } = data
 
     const user = await this.usersRepository.store({

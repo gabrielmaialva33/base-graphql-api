@@ -32,10 +32,10 @@ export namespace Knex {
     },
     migrations: {
       tableName: 'knex_migrations',
-      directory: './src/database/migrations',
+      directory: './database/migrations',
     },
     seeds: {
-      directory: './src/database/seeds',
+      directory: './database/seeds',
     },
   }
 }

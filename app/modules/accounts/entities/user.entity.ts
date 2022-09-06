@@ -1,9 +1,8 @@
 import { ObjectType, Field } from 'type-graphql'
 
-import { Paginated } from 'libs/pagination.entities'
 import BaseEntity from 'app/shared/entities/base.entity'
 
-@ObjectType()
+@ObjectType({ description: 'User entity' })
 export default class UserEntity extends BaseEntity {
   public static readonly tableName = 'users'
 
@@ -29,18 +28,5 @@ export default class UserEntity extends BaseEntity {
   @Field()
   public username!: string
 
-  //todo - hidden password field
   public password_hash!: string
-}
-
-@ObjectType()
-export class UserPaginated extends Paginated<UserEntity>(UserEntity) {}
-
-@ObjectType()
-export class AuthEntity {
-  @Field()
-  public token!: string
-
-  @Field(() => UserEntity)
-  public user!: UserEntity
 }

@@ -2,9 +2,9 @@ import 'reflect-metadata'
 import { ApolloServer } from 'apollo-server'
 import { buildSchema } from 'type-graphql'
 
+import container from 'app/shared/container/inversify'
 import UserResolver from 'app/modules/accounts/resolvers/user.resolver'
 import AuthResolver from 'app/modules/accounts/resolvers/auth.resolver'
-import container from 'app/shared/container/inversify'
 
 import { LOG } from 'utils/log'
 

@@ -9,8 +9,6 @@ export default abstract class BaseEntity {
   @Field((_type) => ID, { name: 'id', nullable: false })
   public id!: string
 
-  //todo - hidden is_deleted field
-  @Field()
   public is_deleted!: boolean
 
   @Field()

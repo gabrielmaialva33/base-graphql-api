@@ -5,13 +5,13 @@ import { IPaginateParams } from 'libs/pagination.interfaces'
 
 const pagination = () => {
   function paginate(this: typeof db, params: IPaginateParams) {
-    let { current_page = 1, per_page = 10, from_start } = params
+    let { currentPage = 1, perPage = 10, fromStart, sortBy = 'id', direction = 'ASC' } = params
 
-    if (current_page < 1 || !current_page) current_page = 1
-    if (per_page < 1 || !per_page) per_page = 1
+    if (currentPage < 1 || !currentPage) currentPage = 1
+    if (perPage < 1 || !perPage) perPage = 1
 
-    const offset = from_start ? 0 : (current_page - 1) * per_page
-    const limit = from_start ? per_page * current_page : per_page
+    const offset = fromStart ? 0 : (currentPage - 1) * perPage
+    const limit = fromStart ? perPage * currentPage : perPage
 
     const postProcessResponse = this.client.config.postProcessResponse
       ? this.client.config.postProcessResponse
@@ -24,7 +24,7 @@ const pagination = () => {
       .first()
       .debug(this._debug)
 
-    this.offset(offset).limit(limit)
+    this.clearOrder().offset(offset).limit(limit).orderBy(sortBy, direction)
 
     return this.client.transaction(async (trx: any) => {
       const data = await this.transacting(trx)
@@ -34,9 +34,11 @@ const pagination = () => {
 
       const meta = postProcessResponse({
         total,
-        last_page: Math.ceil(total / per_page),
-        per_page,
-        current_page,
+        last_page: Math.ceil(total / perPage),
+        per_page: perPage,
+        current_page: currentPage,
+        sort_by: sortBy,
+        direction,
         from: offset,
         to: offset + data.length,
       })

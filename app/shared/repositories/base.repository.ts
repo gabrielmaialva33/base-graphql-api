@@ -13,11 +13,13 @@ export default abstract class BaseRepository<Entity extends {}>
   /**
    * List all entities implementation
    */
-  public async list({ page, perPage }: DTO.List): Promise<IWithPagination<Entity>> {
+  public async list(params: DTO.List<Entity>): Promise<IWithPagination<Entity>> {
+    const { page, perPage, sortBy, direction } = params
+
     return this.orm<Entity>(this.tableName)
       .where('is_deleted', false)
       .orderBy('created_at')
-      .paginate({ current_page: page, per_page: perPage })
+      .paginate({ current_page: page, perPage, sortBy: String(sortBy), direction })
   }
 
   /**

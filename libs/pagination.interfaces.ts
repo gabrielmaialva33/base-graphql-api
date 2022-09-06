@@ -1,22 +1,24 @@
 export interface IPaginateParams {
-  per_page?: number
-  current_page?: number
-  from_start?: boolean
+  perPage?: number
+  currentPage?: number
+  sortBy?: string
+  direction?: 'ASC' | 'DESC'
+  fromStart?: boolean
 }
 
 export interface IBasePagination {
-  current_page: number
-  per_page: number
+  currentPage: number
+  perPage: number
   from: number
   to: number
 }
 
 export interface ILengthAwarePagination extends IBasePagination {
   total: number
-  last_page: number
+  lastPage: number
 }
 
-export type IPagination<TParams> = TParams extends { current_page: 1 } | { from_start: true }
+export type IPagination<TParams> = TParams extends { currentPage: 1 } | { fromStart: true }
   ? ILengthAwarePagination
   : IBasePagination
 

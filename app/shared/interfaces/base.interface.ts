@@ -5,7 +5,7 @@ export namespace IBase {
     /**
      * List all entities
      */
-    list({ page, perPage }?: DTO.List): Promise<IWithPagination<Entity>>
+    list(params?: DTO.List<Entity>): Promise<IWithPagination<Entity>>
 
     /**
      * Store a new entity
@@ -24,9 +24,11 @@ export namespace IBase {
   }
 
   export namespace DTO {
-    export interface List {
+    export interface List<Entity> {
       page?: number
       perPage?: number
+      sortBy?: keyof Entity | string
+      direction?: 'ASC' | 'DESC'
     }
 
     export interface Get<Entity> {
