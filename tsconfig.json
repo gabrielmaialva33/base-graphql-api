@@ -28,7 +28,7 @@
       "utils/*": ["./utils/*"],
       "libs/*": ["./libs/*"],
       "bin/*": ["./bin/*"],
-      "tests/*": ["./tests/*"],
+      "tests/*": ["./tests/*"]
     },
     "types": ["node"]
   }
