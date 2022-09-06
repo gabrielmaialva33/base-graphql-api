@@ -44,4 +44,21 @@ export default class UserResolver {
       },
     })
   }
+
+  @Mutation((_type) => String, { name: 'deleteUser', description: 'Delete a existing user' })
+  public async delete(@Arg('user', { validate: true }) { id: userId }: UserDTO.Get) {
+    const user = await this.usersRepository.findBy({ column: 'id', value: userId })
+    if (!user) throw new Error('This user not exists or not available')
+
+    await this.usersRepository.save({
+      id: userId,
+      data: {
+        email: `${user.email}-${Date.now()}`,
+        username: `${user.username}-${Date.now()}`,
+        is_deleted: true,
+      },
+    })
+
+    return 'User deleted'
+  }
 }
