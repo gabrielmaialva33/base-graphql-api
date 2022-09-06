@@ -90,4 +90,14 @@ export namespace UserDTO {
     @Field(() => UserEntity)
     public user!: UserEntity
   }
+
+  @InputType({ description: 'User login payload' })
+  export class Login {
+    @Field()
+    public uid!: string
+
+    @Field()
+    @MinLength(6)
+    public password!: string
+  }
 }

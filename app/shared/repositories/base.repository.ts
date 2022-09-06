@@ -20,7 +20,7 @@ export default abstract class BaseRepository<Entity extends {}>
     direction = 'ASC',
   }: DTO.List<Entity>): Promise<IWithPagination<Entity>> {
     return this.orm<Entity>(this.tableName)
-      .where('is_deleted', false)
+      .whereNot('is_deleted', true)
       .orderBy('created_at')
       .paginate({ current_page: page, perPage, sortBy: String(sortBy), direction })
   }
@@ -48,7 +48,18 @@ export default abstract class BaseRepository<Entity extends {}>
    * Find an entity by column value implementation
    */
   public async findBy({ column, value }: DTO.Get<Entity>): Promise<Entity | null> {
-    return this.orm(this.tableName).where(String(column), value).first()
+    if (Array.isArray(column))
+      return this.orm(this.tableName)
+        .whereNot('is_deleted', true)
+        .where(function () {
+          column.forEach((c) => this.orWhere(c, value))
+        })
+        .first()
+
+    return this.orm(this.tableName)
+      .whereNot('is_deleted', true)
+      .where(String(column), value)
+      .first()
   }
 }
 

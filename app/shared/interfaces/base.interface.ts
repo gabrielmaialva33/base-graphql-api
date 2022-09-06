@@ -32,7 +32,7 @@ export namespace IBase {
     }
 
     export interface Get<Entity> {
-      column: Partial<Entity> | string
+      column: keyof Entity | Array<keyof Entity | string> | string
       value: any
     }
 
