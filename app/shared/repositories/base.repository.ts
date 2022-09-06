@@ -1,7 +1,7 @@
 import { Knex as KnexOriginal } from 'knex'
 
-import { IPaginateParams, IWithPagination } from '@libs/pagination.interfaces'
-import { IBase } from '@interfaces/base.interface'
+import { IPaginateParams, IWithPagination } from 'libs/pagination.interfaces'
+import { IBase } from 'app/shared/interfaces/base.interface'
 
 import DTO = IBase.DTO
 

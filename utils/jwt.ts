@@ -1,7 +1,7 @@
 import jwt from 'jsonwebtoken'
 
-import UserEntity from '@entities/user.entity'
-import { AppKey } from '@config/index'
+import UserEntity from 'app/modules/accounts/entities/user.entity'
+import { AppKey } from 'config/index'
 
 export const generateToken = (
   user: Partial<UserEntity>,

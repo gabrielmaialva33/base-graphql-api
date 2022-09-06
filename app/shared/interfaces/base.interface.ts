@@ -1,4 +1,4 @@
-import { IWithPagination } from '@libs/pagination.interfaces'
+import { IWithPagination } from 'libs/pagination.interfaces'
 
 export namespace IBase {
   export interface Repository<Entity> {

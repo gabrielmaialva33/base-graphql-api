@@ -2,12 +2,11 @@ import 'reflect-metadata'
 import { ApolloServer } from 'apollo-server'
 import { buildSchema } from 'type-graphql'
 
-import container from '@container/inversify'
+import UserResolver from 'app/modules/accounts/resolvers/user.resolver'
+import AuthResolver from 'app/modules/accounts/resolvers/auth.resolver'
+import container from 'app/shared/container/inversify'
 
-import UserResolver from '@resolvers/user.resolver'
-import AuthResolver from '@resolvers/auth.resolver'
-
-import { LOG } from '@utils/log'
+import { LOG } from 'utils/log'
 
 export const Schemas = async () => {
   return await buildSchema({

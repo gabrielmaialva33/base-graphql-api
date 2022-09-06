@@ -1,5 +1,6 @@
 {
-  "extends": "./tsconfig.paths.json",
+  "include": ["**/*"],
+  "exclude": ["node_modules/**/*", ".vscode/**/*", ".idea/**/*", "build"],
   "compilerOptions": {
     "incremental": true,
     "lib": ["ESNext", "esnext.asynciterable"],
@@ -19,11 +20,16 @@
     "strictNullChecks": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
-    "skipLibCheck": true
-  },
-  "include": ["**/*"],
-  "exclude": ["node_modules/**/*", ".vscode/**/*", ".idea/**/*", "build"],
-  "ts-node": {
-    "require": ["tsconfig-paths/register"]
+    "skipLibCheck": true,
+    "paths": {
+      "app/*": ["./app/*"],
+      "config/*": ["./config/*"],
+      "database/*": ["./database/*"],
+      "utils/*": ["./utils/*"],
+      "libs/*": ["./libs/*"],
+      "bin/*": ["./bin/*"],
+      "tests/*": ["./tests/*"],
+    },
+    "types": ["node"]
   }
 }

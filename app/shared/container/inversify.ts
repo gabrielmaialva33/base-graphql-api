@@ -1,11 +1,11 @@
 import { Container } from 'inversify'
 
-import { IUser } from '@interfaces/user.interface'
-import UsersRepository from '@repositories/users.repository'
-import UserResolver from '@resolvers/user.resolver'
-import AuthResolver from '@resolvers/auth.resolver'
+import { IUser } from 'app/modules/accounts/interfaces/user.interface'
+import UsersRepository from 'app/modules/accounts/repositories/users.repository'
+import UserResolver from 'app/modules/accounts/resolvers/user.resolver'
+import AuthResolver from 'app/modules/accounts/resolvers/auth.resolver'
 
-import TYPES from '@container/types'
+import TYPES from 'app/shared/container/types'
 
 const container = new Container({ skipBaseClassChecks: true })
 

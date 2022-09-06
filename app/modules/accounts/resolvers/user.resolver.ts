@@ -2,12 +2,12 @@ import { inject, injectable } from 'inversify'
 import { Arg, Mutation, Query, Resolver } from 'type-graphql'
 import argon2 from 'argon2'
 
-import { IUser } from '@interfaces/user.interface'
-import UserEntity, { UserPaginated } from '@entities/user.entity'
-import { EditUserPayload, GetUserPayload } from '@entities/dto/user.dto'
-import { PaginationParams } from '@libs/pagination.dto'
+import { IUser } from 'app/modules/accounts/interfaces/user.interface'
+import UserEntity, { UserPaginated } from 'app/modules/accounts/entities/user.entity'
+import { PaginationParams } from 'libs/pagination.dto'
+import { EditUserPayload, GetUserPayload } from 'app/modules/accounts/dto/user.dto'
 
-import TYPES from '@container/types'
+import TYPES from 'app/shared/container/types'
 
 @injectable()
 @Resolver((_of) => UserEntity)
@@ -26,7 +26,7 @@ export default class UserResolver {
   }
 
   @Query((_type) => UserEntity, { name: 'getUser', description: 'Get user by id' })
-  public async get(@Arg('payload', { validate: true }) { id: userId }: GetUserPayload) {
+  public async get(@Arg('user', { validate: true }) { id: userId }: GetUserPayload) {
     return this.usersRepository.findBy({ column: 'id', value: userId })
   }
 

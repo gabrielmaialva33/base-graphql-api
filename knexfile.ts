@@ -1,1 +1,1 @@
-module.exports = require('./src/config').Knex.config
+module.exports = require('./config').Knex.config

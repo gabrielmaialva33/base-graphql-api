@@ -1,10 +1,21 @@
 import { InputType, Field } from 'type-graphql'
 import { IsEmail, Matches, MaxLength, MinLength } from 'class-validator'
 
-import { Unique } from '@validators/unique'
-import { Exists } from '@validators/exists'
+import { Exists, Unique } from 'app/shared/validators'
+import UserEntity from 'app/modules/accounts/entities/user.entity'
 
-import UserEntity from '@entities/user.entity'
+@InputType({ description: 'Get user payload' })
+export class GetUserPayload {
+  @Field((_type) => String, { nullable: false, description: 'User id' })
+  @Exists(UserEntity.tableName, { message: 'This user not exists or not available' })
+  public id!: String
+
+  @Field((_type) => String, { nullable: true, description: 'User email' })
+  public email?: String
+
+  @Field((_type) => String, { nullable: true, description: 'User username' })
+  public username?: String
+}
 
 @InputType()
 export class RegisterPayload implements Partial<UserEntity> {
@@ -70,11 +81,4 @@ export class EditUserPayload implements Partial<UserEntity> {
   @Field({ nullable: true })
   @MinLength(6)
   public password?: string
-}
-
-@InputType()
-export class GetUserPayload {
-  @Field((_type) => String)
-  @Exists(UserEntity.tableName, { message: 'This user not exists or not available' })
-  public id!: String
 }

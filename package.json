@@ -19,7 +19,7 @@
   "scripts": {
     "clean": "rimraf build",
     "build": "tsc",
-    "start": "node -r ts-node/register/transpile-only -r tsconfig-paths/register build/src/server.js",
+    "start": "node -r ts-node/register/transpile-only -r tsconfig-paths/register build/server.js",
     "watch:build": "tsc --watch",
     "watch:server": "nodemon",
     "watch:test": "nodemon --watch './**/*.ts' --exec 'ts-node' bin/test.ts",
