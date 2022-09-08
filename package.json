@@ -25,7 +25,7 @@
     "watch:test": "nodemon --watch './**/*.ts' --exec 'ts-node' bin/test.ts",
     "db:migrate": "knex migrate:latest",
     "db:rollback": "knex migrate:rollback",
-    "db:reset": "knex migrate:rollback && knex migrate:latest",
+    "db:reset": "knex migrate:rollback && knex migrate:latest && knex seed:run",
     "test": "ts-node bin/test.ts",
     "lint": "eslint . --ext=.ts",
     "format": "prettier --write ."

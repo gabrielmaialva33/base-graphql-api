@@ -9,6 +9,7 @@ export async function up(knex: Knex): Promise<void> {
     table.string('slug', 30).notNullable()
     table.string('name', 30).notNullable()
     table.text('description').notNullable()
+    table.boolean('is_deleted').defaultTo(false)
 
     table.timestamps(true, true)
   })

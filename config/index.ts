@@ -4,14 +4,13 @@ import { parse } from 'pg-connection-string'
 dotenv.config()
 
 export namespace Database {
-  export const url =
-    process.env.DATABASE_URL || 'postgresql://postgres:postgres@localhost:5432/postgres'
-  export const urlParsed = parse(url)
-  export const host = urlParsed.host || process.env.PG_HOST || 'localhost'
-  export const port = urlParsed.port || process.env.PG_PORT || 5432
-  export const user = urlParsed.user || process.env.PG_USER || 'postgres'
-  export const password = urlParsed.password || process.env.PG_PASSWORD || 'postgres'
-  export const database = urlParsed.database || process.env.PG_DATABASE || 'postgres'
+  export const url = process.env.DATABASE_URL
+  export const urlParsed = url ? parse(url) : null
+  export const host = urlParsed ? urlParsed.host : process.env.PG_HOST
+  export const port = urlParsed ? urlParsed.port : process.env.PG_PORT
+  export const user = urlParsed ? urlParsed.user : process.env.PG_USER
+  export const password = urlParsed ? urlParsed.password : process.env.PG_PASSWORD
+  export const database = urlParsed ? urlParsed.database : process.env.PG_DATABASE
   export const min = Number(process.env.PG_POOL_MIN || '2')
   export const max = Number(process.env.PG_POOL_MAX || '10')
 }
