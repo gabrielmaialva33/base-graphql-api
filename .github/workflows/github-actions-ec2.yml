@@ -50,11 +50,6 @@ jobs:
             git pull origin master &&
             export NVM_DIR=~/.nvm &&
             source ~/.nvm/nvm.sh &&
-            export DATABASE_URL=$DATABASE_URL &&
-            export PG_HOST=$PG_HOST &&
-            export PG_PASSWORD=$PG_PASSWORD &&
-            export PG_DB_NAME=$PG_DB_NAME &&
-            MYVARS='$DATABASE_URL:$PG_HOST:$PG_PASSWORD:$PG_DB_NAME' &&
-            envsubst "$MYVARS" < .env.example > .env &&
+            envsubst "$DATABASE_URL,$PG_HOST,$PG_PASSWORD,$PG_DB_NAME" < .env.example > .env &&
             pm2 start ecosystem.config.js
           '
