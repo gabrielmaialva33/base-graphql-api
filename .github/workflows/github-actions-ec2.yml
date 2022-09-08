@@ -31,16 +31,15 @@ jobs:
             then
               mkdir base-graphql-api &&
               git clone https://github.com/gabrielmaialva33/base-graphql-api.git base-graphql-api &&
-              cd base-graphql-api && npm install yarn -g &&
+              cd base-graphql-api && npm install yarn -g && npm install pm2@latest -g &&
               yarn && yarn build && yarn db:reset
             else
-              cd server
+              cd base-graphql-api
             fi
 
             git checkout master &&
             git fetch --all &&
             git reset --hard origin/master &&
             git pull origin master &&
-            npm install pm2@latest -g
             pm2 start ecosystem.config.js
           '
