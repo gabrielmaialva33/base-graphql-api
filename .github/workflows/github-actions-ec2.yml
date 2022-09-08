@@ -17,6 +17,10 @@ jobs:
       - name: Deploy in EC2
         env:
           PRIVATE_KEY: ${{ secrets.EC2_PRIVATE_KEY  }}
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+          PG_HOST: ${{ secrets.PG_HOST }}
+          PG_PASSWORD: ${{ secrets.PG_PASSWORD }}
+          PG_DB_NAME: ${{ secrets.PG_DB_NAME }}
 
         run: |
           echo "$PRIVATE_KEY" > private_key && chmod 400 private_key
@@ -26,8 +30,14 @@ jobs:
             DIR="/home/ubuntu/base-graphql-api"
             pm2 delete all
             cd /home/ubuntu
+
             export NVM_DIR=~/.nvm
             source ~/.nvm/nvm.sh
+
+            export DATABASE_URL=$DATABASE_URL
+            export PG_HOST=$PG_HOST
+            export PG_PASSWORD=$PG_PASSWORD
+            export PG_DB_NAME=$PG_DB_NAME
 
             if [ ! -d $DIR ]
             then
@@ -45,5 +55,6 @@ jobs:
             git pull origin master &&
             export NVM_DIR=~/.nvm &&
             source ~/.nvm/nvm.sh &&
+            cp .env.example .env && envsubst < .env > .env &&
             pm2 start ecosystem.config.js
           '
