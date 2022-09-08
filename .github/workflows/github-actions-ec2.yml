@@ -22,7 +22,7 @@ jobs:
 
         run: |
           echo "$PRIVATE_KEY" > private_key && chmod 400 private_key
-          ssh -o StrictHostKeyChecking=no -i private_key ${USER_NAME}@${HOSTNAME} '
+          ssh -o StrictHostKeyChecking=no -i private_key ubuntu@ec2-18-229-117-8.sa-east-1.compute.amazonaws.com '
 
             #Now we have got the access of EC2 and we will start the deploy .
             DIR="/home/ubuntu/server"
