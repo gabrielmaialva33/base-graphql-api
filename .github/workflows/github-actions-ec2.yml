@@ -51,10 +51,11 @@ jobs:
             export NVM_DIR=~/.nvm &&
             source ~/.nvm/nvm.sh &&
             echo "
-              export DATABASE_URL=$DATABASE_URL
-              export PG_HOST=$PG_HOST
-              export PG_PASSWORD=$PG_PASSWORD
-              export PG_DB_NAME=$PG_DB_NAME " > .env.ci &&
+              export DATABASE_URL="$DATABASE_URL"
+              export PG_HOST="$PG_HOST"
+              export PG_PASSWORD="$PG_PASSWORD"
+              export PG_DB_NAME="$PG_DB_NAME"
+                  " > .env.ci &&
             source .env.ci &&
             envsubst < .env.example > .env &&
             pm2 start ecosystem.config.js
