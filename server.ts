@@ -26,10 +26,7 @@ export const startApolloServer = async () => {
       host: process.env.HOST,
       port: process.env.PORT || 4000,
     })
-    .then(({ url }) => {
-      LOG('info', `🚀 Server is running, GraphQL Playground available at ${url}`)
-      console.log(require('./config').Knex.config)
-    })
+    .then(({ url }) => LOG('info', `🚀 Server is running, GraphQL Playground available at ${url}`))
 }
 
 startApolloServer()
