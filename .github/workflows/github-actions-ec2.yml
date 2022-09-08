@@ -32,9 +32,6 @@ jobs:
               mkdir base-graphql-api &&
               git clone https://github.com/gabrielmaialva33/base-graphql-api.git base-graphql-api &&
               cd base-graphql-api && npm install yarn -g &&
-              sudo ln -s "$NVM_DIR/versions/node/$(nvm version)/bin/node" "/usr/local/bin/node" &&
-              sudo ln -s "$NVM_DIR/versions/node/$(nvm version)/bin/npm" "/usr/local/bin/npm" &&
-              sudo ln -s "$NVM_DIR/versions/node/$(nvm version)/bin/pm2" "/usr/local/bin/pm2" &&
               yarn && yarn build && yarn db:reset
             else
               cd base-graphql-api
@@ -44,5 +41,8 @@ jobs:
             git fetch --all &&
             git reset --hard origin/master &&
             git pull origin master &&
+            sudo ln -s "$NVM_DIR/versions/node/$(nvm version)/bin/node" "/usr/local/bin/node" &&
+            sudo ln -s "$NVM_DIR/versions/node/$(nvm version)/bin/npm" "/usr/local/bin/npm" &&
+            sudo ln -s "$NVM_DIR/versions/node/$(nvm version)/bin/pm2" "/usr/local/bin/pm2" &&
             pm2 start ecosystem.config.js
           '
