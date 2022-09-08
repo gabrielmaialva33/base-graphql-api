@@ -28,11 +28,11 @@ jobs:
 
             #Now we have got the access of EC2 and we will start the deploy .
             DIR="/home/ubuntu/base-graphql-api"
-            pm2 delete all
-            cd /home/ubuntu
-
             export NVM_DIR=~/.nvm
             source ~/.nvm/nvm.sh
+
+            pm2 delete all
+            cd /home/ubuntu
 
             if [ ! -d $DIR ]
             then
@@ -50,10 +50,12 @@ jobs:
             git pull origin master &&
             export NVM_DIR=~/.nvm &&
             source ~/.nvm/nvm.sh &&
-            export DATABASE_URL=$DATABASE_URL &&
-            export PG_HOST=$PG_HOST &&
-            export PG_PASSWORD=$PG_PASSWORD &&
-            export PG_DB_NAME=$PG_DB_NAME &&
+            echo "
+              export DATABASE_URL=$DATABASE_URL
+              export PG_HOST=$PG_HOST
+              export PG_PASSWORD=$PG_PASSWORD
+              export PG_DB_NAME=$PG_DB_NAME " > .env.ci &&
+            source .env.ci &&
             envsubst < .env.example > .env &&
             pm2 start ecosystem.config.js
           '
