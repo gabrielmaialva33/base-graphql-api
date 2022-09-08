@@ -1,6 +1,7 @@
 name: Deploy in EC2
 env:
   PRIVATE_KEY: ${{ secrets.EC2_PRIVATE_KEY  }}
+  DATABASE: ${{ secrets.DATABASE }}
 
 on:
   push:
