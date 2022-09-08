@@ -23,15 +23,15 @@ jobs:
           ssh -o StrictHostKeyChecking=no -i private_key ubuntu@ec2-18-229-117-8.sa-east-1.compute.amazonaws.com '
 
             #Now we have got the access of EC2 and we will start the deploy .
-            DIR="/home/ubuntu/server"
+            DIR="/home/ubuntu/base-graphql-api"
             pm2 delete all
             cd /home/ubuntu
 
             if [ ! -d $DIR ]
             then
-              mkdir server &&
-              git clone https://github.com/gabrielmaialva33/base-graphql-api.git server &&
-              cd server &&
+              mkdir base-graphql-api &&
+              git clone https://github.com/gabrielmaialva33/base-graphql-api.git base-graphql-api &&
+              cd base-graphql-api && npm install yarn -g &&
               yarn && yarn build && yarn db:reset
             else
               cd server
