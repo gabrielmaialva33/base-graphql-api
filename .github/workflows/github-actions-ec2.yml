@@ -14,6 +14,16 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
+
+      - name: Make envfile
+        uses: SpicyPizza/create-envfile@v1.3
+        with:
+          file-name: .env.ci
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+          PG_HOST: ${{ secrets.PG_HOST }}
+          PG_PASSWORD: ${{ secrets.PG_PASSWORD }}
+          PG_DB_NAME: ${{ secrets.PG_DB_NAME }}
+
       - name: Deploy in EC2
         env:
           PRIVATE_KEY: ${{ secrets.EC2_PRIVATE_KEY  }}
@@ -21,7 +31,6 @@ jobs:
 
         run: |
           echo "$PRIVATE_KEY" > private_key && chmod 400 private_key
-          echo "$DATABASE" > envci
           ssh -o StrictHostKeyChecking=no -i private_key ubuntu@ec2-18-229-117-8.sa-east-1.compute.amazonaws.com '
 
             #Now we have got the access of EC2 and we will start the deploy .
@@ -48,7 +57,5 @@ jobs:
             git pull origin master &&
             export NVM_DIR=~/.nvm &&
             source ~/.nvm/nvm.sh &&
-            source envci &&
-            envsubst < .env.example > .env &&
             pm2 start ecosystem.config.js
           '
