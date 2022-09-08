@@ -49,6 +49,8 @@ jobs:
             git pull origin master &&
             export NVM_DIR=~/.nvm &&
             source ~/.nvm/nvm.sh &&
-            echo "DATABASE: ${{ secrets.DATABASE }}" > .envci &&
+            echo "${{ secrets.DATABASE }}" > envci &&
+            source envci &&
+            envsubst < .env.example > .env &&
             pm2 start ecosystem.config.js
           '
