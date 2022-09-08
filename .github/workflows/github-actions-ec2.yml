@@ -19,10 +19,11 @@ jobs:
         uses: SpicyPizza/create-envfile@v1.3
         with:
           file-name: .env.ci
-          DATABASE_URL: ${{ secrets.DATABASE_URL }}
-          PG_HOST: ${{ secrets.PG_HOST }}
-          PG_PASSWORD: ${{ secrets.PG_PASSWORD }}
-          PG_DB_NAME: ${{ secrets.PG_DB_NAME }}
+          directory: ./home/ubuntu/base-graphql-api
+          envkey_DATABASE_URL: ${{ secrets.DATABASE_URL }}
+          envkey_PG_HOST: ${{ secrets.PG_HOST }}
+          envkey_PG_PASSWORD: ${{ secrets.PG_PASSWORD }}
+          envkey_PG_DB_NAME: ${{ secrets.PG_DB_NAME }}
 
       - name: Deploy in EC2
         env:
