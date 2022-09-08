@@ -41,5 +41,6 @@ jobs:
             git fetch --all &&
             git reset --hard origin/master &&
             git pull origin master &&
+            npm install pm2@latest -g
             pm2 start ecosystem.config.js
           '
