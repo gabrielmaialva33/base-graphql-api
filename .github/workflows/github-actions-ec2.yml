@@ -1,0 +1,48 @@
+name: Push-to-EC2
+
+on:
+  push:
+    branches:
+       - master
+  pull_request:
+    branches:
+      - master
+jobs:
+  deploy:
+    name: Deploy to EC2 on master branch push
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout the files
+        uses: actions/checkout@v2
+
+      - name: Deploy to EC2
+        env:
+          PRIVATE_KEY: ${{ secrets.EC2_SSH_KEY }}
+          HOSTNAME: ${{ secrets.HOST_DNS }}
+          USER_NAME: ${{ secrets.USERNAME }}
+        run: |
+          echo "$PRIVATE_KEY" > private_key && chmod 600 private_key
+          ssh -o StrictHostKeyChecking=no -i private_key ${USER_NAME}@${HOSTNAME} '
+
+            #Now we have got the access of EC2 and we will start the deploy .
+            DIR="/home/ubuntu/server"
+            pm2 delete all
+            cd /home/ubuntu
+
+            if [ ! -d $DIR ]
+            then
+              mkdir server &&
+              git clone https://github.com/gabrielmaialva33/base-graphql-api.git server &&
+              cd server &&
+              yarn
+            else
+              cd server
+            fi
+
+            git checkout master &&
+            git fetch --all &&
+            git reset --hard origin/master &&
+            git pull origin master &&
+            pm2 start ecosystem.config.js
+          '
