@@ -1,6 +1,6 @@
-
-
-name: GitHub Actions EC2
+name: Deploy in EC2
+env:
+  PRIVATE_KEY: ${{ secrets.EC2_PRIVATE_KEY  }}
 
 on:
   push:
@@ -30,7 +30,7 @@ jobs:
             if [ ! -d $DIR ]
             then
               mkdir server &&
-              git clone https://github.com/CodePanthers/node-aws-ec2-github-actions.git server &&
+              git clone https://github.com/gabrielmaialva33/base-graphql-api.git server &&
               cd server &&
               yarn && yarn build && yarn db:reset
             else
