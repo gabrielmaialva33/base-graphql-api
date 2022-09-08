@@ -54,6 +54,6 @@ jobs:
             export PG_HOST=$PG_HOST &&
             export PG_PASSWORD=$PG_PASSWORD &&
             export PG_DB_NAME=$PG_DB_NAME &&
-            envsubst "`printf '${%s} ' $(sh -c "env|cut -d'=' -f1")`" < .env.example > .env &&
+            envsubst < .env.example > .env &&
             pm2 start ecosystem.config.js
           '
