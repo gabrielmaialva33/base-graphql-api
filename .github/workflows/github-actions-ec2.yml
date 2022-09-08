@@ -34,11 +34,6 @@ jobs:
             export NVM_DIR=~/.nvm
             source ~/.nvm/nvm.sh
 
-            export DATABASE_URL=$DATABASE_URL
-            export PG_HOST=$PG_HOST
-            export PG_PASSWORD=$PG_PASSWORD
-            export PG_DB_NAME=$PG_DB_NAME
-
             if [ ! -d $DIR ]
             then
               mkdir base-graphql-api &&
@@ -55,6 +50,10 @@ jobs:
             git pull origin master &&
             export NVM_DIR=~/.nvm &&
             source ~/.nvm/nvm.sh &&
+            export DATABASE_URL=$DATABASE_URL &&
+            export PG_HOST=$PG_HOST &&
+            export PG_PASSWORD=$PG_PASSWORD &&
+            export PG_DB_NAME=$PG_DB_NAME &&
             envsubst < .env.example > .env &&
             pm2 start ecosystem.config.js
           '
