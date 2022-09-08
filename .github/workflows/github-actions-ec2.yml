@@ -1,25 +1,25 @@
-name: Push-to-EC2
+
+
+name: GitHub Actions EC2
 
 on:
   push:
-    branches:
-       - master
+    branches: [ master ]
 
   workflow_dispatch:
+
 jobs:
+
   build:
-    name: Deploy to EC2 on master branch push
     runs-on: ubuntu-latest
-
     steps:
-      - name: Checkout the files
-        uses: actions/checkout@v2
-
-      - name: Deploy to EC2
+      - uses: actions/checkout@v3
+      - name: Deploy in EC2
         env:
-          PRIVATE_KEY: ${{ secrets.EC2_SSH_KEY }}
-          HOSTNAME: ${{ secrets.HOST_DNS }}
-          USER_NAME: ${{ secrets.USERNAME }}
+          PRIVATE_KEY: ${{ secrets.EC2_PRIVATE_KEY  }}
+          HOSTNAME : ${{ secrets.HOSTNAME  }}
+          USER_NAME : ${{ secrets.USER  }}
+
         run: |
           echo "$PRIVATE_KEY" > private_key && chmod 600 private_key
           ssh -o StrictHostKeyChecking=no -i private_key ${USER_NAME}@${HOSTNAME} '
@@ -32,9 +32,9 @@ jobs:
             if [ ! -d $DIR ]
             then
               mkdir server &&
-              git clone https://github.com/gabrielmaialva33/base-graphql-api.git server &&
+              git clone https://github.com/CodePanthers/node-aws-ec2-github-actions.git server &&
               cd server &&
-              yarn
+              yarn && yarn build && yarn db:reset
             else
               cd server
             fi
