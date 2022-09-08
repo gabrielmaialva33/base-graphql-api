@@ -26,12 +26,14 @@ jobs:
             DIR="/home/ubuntu/base-graphql-api"
             pm2 delete all
             cd /home/ubuntu
+            export NVM_DIR=~/.nvm
+            source ~/.nvm/nvm.sh
 
             if [ ! -d $DIR ]
             then
               mkdir base-graphql-api &&
               git clone https://github.com/gabrielmaialva33/base-graphql-api.git base-graphql-api &&
-              cd base-graphql-api && npm install yarn -g &&
+              cd base-graphql-api && export NVM_DIR=~/.nvm && source ~/.nvm/nvm.sh &&
               yarn && yarn build && yarn db:reset
             else
               cd base-graphql-api
@@ -41,6 +43,7 @@ jobs:
             git fetch --all &&
             git reset --hard origin/master &&
             git pull origin master &&
-            sudo npm install -g pm2 &&
+            export NVM_DIR=~/.nvm &&
+            source ~/.nvm/nvm.sh &&
             pm2 start ecosystem.config.js
           '
