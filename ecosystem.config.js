@@ -2,7 +2,9 @@ module.exports = {
   apps: [
     {
       name: 'base-graphql-api',
-      script: 'node -r ts-node/register/transpile-only -r tsconfig-paths/register build/server.js',
+      script: 'yarn',
+      args: 'start',
+      interpreter: '/bin/bash',
       instances: 'max',
       exec_mode: 'cluster',
       autorestart: true,

@@ -20,7 +20,6 @@
     "clean": "rimraf build",
     "build": "tsc",
     "start": "node -r ts-node/register/transpile-only -r tsconfig-paths/register build/server.js",
-    "pm2:start": "pm2 start \"node -r ts-node/register/transpile-only -r tsconfig-paths/register build/server.js\" base-graphql-api",
     "watch:build": "tsc --watch",
     "watch:server": "nodemon",
     "watch:test": "nodemon --watch './**/*.ts' --exec 'ts-node' bin/test.ts",
