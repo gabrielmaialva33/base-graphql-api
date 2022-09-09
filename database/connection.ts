@@ -2,7 +2,7 @@ import createKnex from 'knex'
 import KnexTinyLogger from 'knex-tiny-logger'
 import { Knex as KnexOriginal } from 'knex'
 
-import { IPaginateParams, IWithPagination } from 'libs/pagination.interfaces'
+import { IPaginateParams, IWithPagination } from 'libs/pagination/pagination.interfaces'
 
 declare module 'knex' {
   namespace Knex {
@@ -15,7 +15,7 @@ declare module 'knex' {
 }
 
 import { LOG } from 'utils/log'
-import pagination from 'libs/pagination'
+import pagination from 'libs/pagination/pagination'
 
 const logger = (_?: any, ...log: any[]) => {
   let l = ''

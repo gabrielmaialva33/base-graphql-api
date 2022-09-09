@@ -2,7 +2,7 @@ import { Field, InputType, ObjectType } from 'type-graphql'
 import { MaxLength, MinLength } from 'class-validator'
 
 import { Exists, Unique } from 'app/shared/validators'
-import { Paginated } from 'libs/pagination.entities'
+import { Paginated } from 'libs/pagination/pagination.entities'
 import RoleEntity from 'app/modules/accounts/entities/role.entity'
 
 @ObjectType({ description: 'Role list' })

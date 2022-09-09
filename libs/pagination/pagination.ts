@@ -1,7 +1,7 @@
 import { knex } from 'knex'
 
 import db from 'database/connection'
-import { IPaginateParams } from 'libs/pagination.interfaces'
+import { IPaginateParams } from 'libs/pagination/pagination.interfaces'
 
 const pagination = () => {
   function paginate(this: typeof db, params: IPaginateParams) {

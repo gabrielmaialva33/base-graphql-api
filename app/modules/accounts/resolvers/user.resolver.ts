@@ -5,7 +5,7 @@ import argon2 from 'argon2'
 import { IUser } from 'app/modules/accounts/interfaces/user.interface'
 import UserEntity from 'app/modules/accounts/entities/user.entity'
 
-import { PaginationDTO } from 'libs/pagination.dto'
+import { PaginationDTO } from 'libs/pagination/pagination.dto'
 import { ListUser, GetUser, EditUser } from 'app/modules/accounts/dto/user.dto'
 
 import TYPES from 'app/shared/container/types'

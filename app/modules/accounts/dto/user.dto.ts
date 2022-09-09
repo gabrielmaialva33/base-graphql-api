@@ -1,7 +1,7 @@
 import { InputType, Field, ObjectType } from 'type-graphql'
 import { IsEmail, Matches, MaxLength, MinLength } from 'class-validator'
 
-import { Paginated } from 'libs/pagination.entities'
+import { Paginated } from 'libs/pagination/pagination.entities'
 import { Exists, Unique } from 'app/shared/validators'
 import UserEntity from 'app/modules/accounts/entities/user.entity'
 
