@@ -9,6 +9,7 @@ import UserResolver from 'app/modules/accounts/resolvers/user.resolver'
 import AuthResolver from 'app/modules/accounts/resolvers/auth.resolver'
 
 import TYPES from 'app/shared/container/types'
+import RoleResolver from 'app/modules/accounts/resolvers/role.resolver'
 
 const container = new Container({ skipBaseClassChecks: true })
 
@@ -19,5 +20,6 @@ container.bind<IRole.Repository>(TYPES.RolesRepository).to(RolesRepository).inSi
 /** resolvers containers */
 container.bind<UserResolver>(UserResolver).to(UserResolver).inSingletonScope()
 container.bind<AuthResolver>(AuthResolver).to(AuthResolver).inSingletonScope()
+container.bind<RoleResolver>(RoleResolver).to(RoleResolver).inSingletonScope()
 
 export default container

@@ -5,12 +5,13 @@ import { buildSchema } from 'type-graphql'
 import container from 'app/shared/container/inversify'
 import UserResolver from 'app/modules/accounts/resolvers/user.resolver'
 import AuthResolver from 'app/modules/accounts/resolvers/auth.resolver'
+import RoleResolver from 'app/modules/accounts/resolvers/role.resolver'
 
 import { LOG } from 'utils/log'
 
 export const Schemas = async () => {
   return await buildSchema({
-    resolvers: [UserResolver, AuthResolver],
+    resolvers: [UserResolver, AuthResolver, RoleResolver],
     container,
   })
 }

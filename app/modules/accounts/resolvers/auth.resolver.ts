@@ -4,7 +4,7 @@ import argon2 from 'argon2'
 
 import { IUser } from 'app/modules/accounts/interfaces/user.interface'
 import UserEntity from 'app/modules/accounts/entities/user.entity'
-import { UserDTO } from 'app/modules/accounts/dto/user.dto'
+import { StoreUser, AuthUser, LoginUser } from 'app/modules/accounts/dto/user.dto'
 
 import TYPES from 'app/shared/container/types'
 import { generateToken } from 'utils/jwt'
@@ -17,11 +17,11 @@ export default class AuthResolver {
     private readonly usersRepository: IUser.Repository
   ) {}
 
-  @Mutation(() => UserDTO.Auth, {
+  @Mutation(() => AuthUser, {
     name: 'login',
     description: 'Login with uid and password',
   })
-  public async login(@Arg('user', { validate: true }) data: UserDTO.Login) {
+  public async login(@Arg('user', { validate: true }) data: LoginUser) {
     const { uid, password } = data
 
     const user = await this.usersRepository.findBy({
@@ -36,11 +36,11 @@ export default class AuthResolver {
     return { token: generateToken(user), user }
   }
 
-  @Mutation(() => UserDTO.Auth, {
+  @Mutation(() => AuthUser, {
     name: 'registerUser',
     description: 'Register a new user',
   })
-  public async register(@Arg('user', { validate: true }) data: UserDTO.Store) {
+  public async register(@Arg('user', { validate: true }) data: StoreUser) {
     const { first_name, last_name, email, username, password } = data
 
     const user = await this.usersRepository.store({

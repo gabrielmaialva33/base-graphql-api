@@ -6,6 +6,7 @@ import RoleEntity from 'app/modules/accounts/entities/role.entity'
 
 import TYPES from 'app/shared/container/types'
 import { PaginationDTO } from 'libs/pagination.dto'
+import { ListRole } from 'app/modules/accounts/dto/role.dto'
 
 @injectable()
 @Resolver((_of) => RoleEntity)
@@ -15,14 +16,11 @@ export default class RoleResolver {
     private readonly roleRepository: IRole.Repository
   ) {}
 
-  @Query((_type) => RoleEntity, { name: 'listRoles', description: 'List of roles with pagination' })
+  @Query((_type) => ListRole, {
+    name: 'listRoles',
+    description: 'List of roles with pagination',
+  })
   public async list(@Arg('params', { nullable: true }) params: PaginationDTO.Params) {
     return this.roleRepository.list(params || {})
   }
-
-  public async get() {}
-
-  public async edit() {}
-
-  public async delete() {}
 }

@@ -1,6 +1,8 @@
-import BaseEntity from 'app/shared/entities/base.entity'
-import { Field } from 'type-graphql'
+import { Field, ObjectType } from 'type-graphql'
 
+import BaseEntity from 'app/shared/entities/base.entity'
+
+@ObjectType({ description: 'Role entity' })
 export default class RoleEntity extends BaseEntity {
   public static readonly tableName = 'roles'
 
@@ -14,12 +16,11 @@ export default class RoleEntity extends BaseEntity {
    * ------------------------------------------------------
    * - This fields are used for graphql
    */
-  @Field()
   public name!: string
 
-  @Field()
+  @Field({ description: 'Role slug' })
   public slug!: string
 
-  @Field()
+  @Field({ description: 'Description of role' })
   public description!: string
 }
