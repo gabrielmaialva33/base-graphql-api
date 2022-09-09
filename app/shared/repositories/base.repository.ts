@@ -36,7 +36,7 @@ export default abstract class BaseRepository<Entity extends {}>
   /**
    * Save an existing entity implementation
    */
-  public async save({ id: entityId, data }: DTO.Save<Entity>): Promise<Entity> {
+  public async save(entityId: string, data: DTO.Save<Entity>): Promise<Entity> {
     const [{ id }] = await this.orm(this.tableName)
       .where({ id: entityId })
       .update(data)

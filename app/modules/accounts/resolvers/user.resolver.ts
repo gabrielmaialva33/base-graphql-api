@@ -33,16 +33,13 @@ export default class UserResolver {
 
   @Mutation((_type) => UserEntity, { name: 'editUser', description: 'Edit a existing user' })
   public async edit(@Arg('user', { validate: true }) user: EditUser) {
-    const { id, first_name, last_name, email, username, password } = user
-    return this.usersRepository.save({
-      id,
-      data: {
-        first_name,
-        last_name,
-        email,
-        username,
-        password_hash: password ? await argon2.hash(password) : undefined,
-      },
+    const { id: userId, first_name, last_name, email, username, password } = user
+    return this.usersRepository.save(userId, {
+      first_name,
+      last_name,
+      email,
+      username,
+      password_hash: password ? await argon2.hash(password) : undefined,
     })
   }
 
@@ -51,13 +48,10 @@ export default class UserResolver {
     const user = await this.usersRepository.findBy({ column: 'id', value: userId })
     if (!user) throw new Error('This user not exists or not available')
 
-    await this.usersRepository.save({
-      id: userId,
-      data: {
-        email: `${user.email}-${Date.now()}`,
-        username: `${user.username}-${Date.now()}`,
-        is_deleted: true,
-      },
+    await this.usersRepository.save(userId, {
+      email: `${user.email}-${Date.now()}`,
+      username: `${user.username}-${Date.now()}`,
+      is_deleted: true,
     })
 
     return 'User deleted'

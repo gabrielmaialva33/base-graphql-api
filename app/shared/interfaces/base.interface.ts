@@ -15,7 +15,7 @@ export namespace IBase {
     /**
      * Save an existing entity
      */
-    save({ id, data }: DTO.Save<Entity>): Promise<Entity>
+    save(entityId: string, data: DTO.Save<Entity>): Promise<Entity>
 
     /**
      * Find an entity by column value
@@ -24,21 +24,18 @@ export namespace IBase {
   }
 
   export namespace DTO {
-    export interface List<Entity> {
+    export type List<Entity> = {
       page?: number
       perPage?: number
       sortBy?: keyof Entity | string
       direction?: 'ASC' | 'DESC'
     }
 
-    export interface Get<Entity> {
+    export type Get<Entity> = {
       column: keyof Entity | Array<keyof Entity | string> | string
       value: any
     }
 
-    export interface Save<Entity> {
-      id: String
-      data: Partial<Entity>
-    }
+    export type Save<Entity> = Partial<Entity>
   }
 }

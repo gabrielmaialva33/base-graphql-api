@@ -12,7 +12,7 @@ export class ListUser extends Paginated<UserEntity>(UserEntity) {}
 export class GetUser {
   @Field((_type) => String, { nullable: false, description: 'User id' })
   @Exists(UserEntity.tableName, { message: 'This user not exists or not available' })
-  public id!: String
+  public id!: string
 }
 
 @InputType({ description: 'Store user payload' })
