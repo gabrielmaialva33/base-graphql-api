@@ -1,14 +1,10 @@
 import { Field, ObjectType } from 'type-graphql'
 
-import BaseEntity from 'app/shared/entities/base.entity'
+import { BaseEntity } from 'app/shared/entities/base.entity'
 
 @ObjectType({ description: 'Role entity' })
 export default class RoleEntity extends BaseEntity {
   public static readonly tableName = 'roles'
-
-  constructor() {
-    super(RoleEntity.tableName)
-  }
 
   /**
    * ------------------------------------------------------

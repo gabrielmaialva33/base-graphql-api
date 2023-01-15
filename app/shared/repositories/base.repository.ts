@@ -2,10 +2,11 @@ import { Knex as KnexOriginal } from 'knex'
 
 import { IPaginateParams, IWithPagination } from 'libs/pagination/pagination.interfaces'
 import { IBase } from 'app/shared/interfaces/base.interface'
+import { BaseEntity } from 'app/shared/entities/base.entity'
 
 import DTO = IBase.DTO
 
-export default abstract class BaseRepository<Entity extends {}>
+export default abstract class BaseRepository<Entity extends BaseEntity>
   implements IBase.Repository<Entity>
 {
   protected constructor(protected orm: KnexOriginal, protected tableName: string) {}

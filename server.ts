@@ -1,8 +1,10 @@
 import 'reflect-metadata'
+
 import { ApolloServer } from 'apollo-server'
 import { buildSchema } from 'type-graphql'
 
 import container from 'app/shared/container/inversify'
+
 import UserResolver from 'app/modules/accounts/resolvers/user.resolver'
 import AuthResolver from 'app/modules/accounts/resolvers/auth.resolver'
 import RoleResolver from 'app/modules/accounts/resolvers/role.resolver'
@@ -30,4 +32,4 @@ export const startApolloServer = async () => {
     .then(({ url }) => LOG('info', `🚀 Server is running, GraphQL Playground available at ${url}`))
 }
 
-startApolloServer()
+startApolloServer().then(() => LOG('info', '🚀 Server is running now!'))

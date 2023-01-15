@@ -5,6 +5,7 @@ import { IRole } from 'app/modules/accounts/interfaces/role.interface'
 import RoleEntity from 'app/modules/accounts/entities/role.entity'
 
 import TYPES from 'app/shared/container/types'
+
 import { PaginationDTO } from 'libs/pagination/pagination.dto'
 import { ListRole, GetRole, StoreRole, EditRole } from 'app/modules/accounts/dto/role.dto'
 

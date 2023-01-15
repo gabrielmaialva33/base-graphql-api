@@ -1,4 +1,5 @@
 import dotenv from 'dotenv'
+import 'reflect-metadata'
 import { parse } from 'pg-connection-string'
 
 dotenv.config()
